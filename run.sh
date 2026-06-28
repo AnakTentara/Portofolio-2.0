@@ -95,7 +95,7 @@ trap cleanup SIGINT SIGTERM EXIT
 # 3. Start Backend
 cd /home/container/backend
 export PORT="$BACKEND_PORT"
-node src/server.js &
+node --experimental-sqlite src/server.js &
 BACKEND_PID=$!
 
 # 4. Start Frontend
