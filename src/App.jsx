@@ -23,6 +23,7 @@ import Project from './components/pages/direct-page/Project';
 import NotFound from './components/pages/direct-page/404';
 
 import { PreventInteractions } from './utils/preventInteractions';
+import CustomCursor from './components/CustomCursor';
 
 import icongr from '../images/icon-bggradient.png';
 import icon from '../images/icon.png';
@@ -90,6 +91,7 @@ function App() {
   return (
     <div className="relative overflow-x-hidden min-h-screen">
       <PreventInteractions />
+      <CustomCursor />
 
       {location.pathname === '/' ? <Navbar /> : <NavbarOther />}
 
