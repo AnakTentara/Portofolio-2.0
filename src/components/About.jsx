@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import {
-  Code2, Server, Bot, Gamepad2,
+  Code2, Server, Bot, Gamepad2, Cpu,
   GraduationCap, Mail, Github, Linkedin,
   MapPin, Calendar, Briefcase, Layers,
   ArrowRight
@@ -95,44 +95,6 @@ const SkillCard = ({ icon: Icon, title, description, gradient, delay }) => {
   );
 };
 
-const TimelineItem = ({ year, title, subtitle, active, delay }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: -20 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
-      className="relative flex gap-4 pb-8 last:pb-0"
-    >
-      {/* Line */}
-      <div className="flex flex-col items-center">
-        <div
-          className={`w-3 h-3 rounded-full mt-1 flex-shrink-0 transition-all duration-300 ${
-            active ? 'bg-primary-400 shadow-[0_0_12px_rgba(59,130,246,0.6)]' : 'bg-slate-600'
-          }`}
-        />
-        <div className="w-[1px] flex-1 mt-2" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.1), transparent)' }} />
-      </div>
-      {/* Content */}
-      <div className="pb-2">
-        <span
-          className={`text-xs font-medium px-2 py-0.5 rounded-full mb-2 inline-block ${
-            active ? 'bg-primary/20 text-primary-300 border border-primary/30' : 'bg-white/5 text-slate-500 border border-white/10'
-          }`}
-          style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-        >
-          {year}
-        </span>
-        <h4 className="text-white font-semibold text-sm mt-1" style={{ fontFamily: 'Archivo, sans-serif' }}>{title}</h4>
-        <p className="text-slate-500 text-xs mt-0.5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{subtitle}</p>
-      </div>
-    </motion.div>
-  );
-};
-
 const LanguageBar = ({ lang, level, color, delay }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
@@ -157,6 +119,11 @@ const LanguageBar = ({ lang, level, color, delay }) => {
 };
 
 const About = () => {
+  const timelineRef = useRef(null);
+  const lineRef = useRef(null);
+  const dotRefs = useRef([]);
+  const cardRefs = useRef([]);
+
   const skills = [
     { icon: Code2,    title: 'Web Development',  description: 'Building modern, responsive interfaces with React, Vite, and Tailwind CSS.', gradient: 'linear-gradient(135deg, #3B82F6, #2563EB)', delay: 0 },
     { icon: Server,   title: 'Server Management', description: 'Setting up and managing VPS, reverse proxies, and Docker environments.', gradient: 'linear-gradient(135deg, #8B5CF6, #7C3AED)', delay: 0.08 },
@@ -173,12 +140,11 @@ const About = () => {
   ];
 
   const timeline = [
-    { year: '2019', title: 'Started Coding', subtitle: 'First HTML/CSS experiments', active: false },
-    { year: '2021', title: 'JavaScript & Node.js', subtitle: 'Built first Discord bots', active: false },
-    { year: '2022', title: 'Minecraft Development', subtitle: 'Java plugins & server management', active: false },
-    { year: '2023', title: 'React & Modern Web', subtitle: 'Launched Portfolio v1.0', active: false },
-    { year: '2024', title: 'MAN 1 Muara Enim', subtitle: 'Science Major, Informatics focus', active: true },
-    { year: '2026', title: 'Portfolio 3.0', subtitle: 'Full-stack renovation ✨', active: true },
+    { year: '2019', title: 'Started Coding', subtitle: 'First HTML/CSS experiments', active: false, icon: Code2 },
+    { year: '2021', title: 'JS & Node.js', subtitle: 'Built first Discord bots', active: false, icon: Bot },
+    { year: '2022', title: 'Minecraft Dev', subtitle: 'Java plugins & server setup', active: false, icon: Gamepad2 },
+    { year: '2023', title: 'React & Modern Web', subtitle: 'Launched Portfolio 1.0', active: false, icon: Code2 },
+    { year: '2024', title: 'Robotics & IoT', subtitle: 'Smart devices & hardware automation', active: true, icon: Cpu },
   ];
 
   const techStack = ['React', 'Node.js', 'JavaScript', 'Java', 'TailwindCSS', 'Discord.js', 'Express', 'Vite'];
@@ -189,6 +155,50 @@ const About = () => {
     { icon: Briefcase,  label: 'Experience',  value: '5+ years' },
     { icon: Layers,     label: 'Projects',    value: '15+ completed' },
   ];
+
+  // Staggered GSAP Entry Animations for Horizontal Timeline
+  useEffect(() => {
+    const el = timelineRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      });
+
+      // 1. Animate horizontal track line
+      if (lineRef.current) {
+        tl.fromTo(lineRef.current, 
+          { scaleX: 0 }, 
+          { scaleX: 1, duration: 0.8, ease: 'power2.out', transformOrigin: 'left center' }
+        );
+      }
+
+      // 2. Animate timeline dots/nodes
+      if (dotRefs.current.length > 0) {
+        tl.fromTo(dotRefs.current.filter(Boolean), 
+          { scale: 0, opacity: 0 }, 
+          { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.8)' },
+          '-=0.4'
+        );
+      }
+
+      // 3. Staggered reveal cards
+      if (cardRefs.current.length > 0) {
+        tl.fromTo(cardRefs.current.filter(Boolean), 
+          { y: 20, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' },
+          '-=0.3'
+        );
+      }
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section id="about" className="py-24 bg-transparent relative">
@@ -205,11 +215,10 @@ const About = () => {
           subtitle="A passionate teenage developer from Indonesia, exploring the world of technology and building things that matter."
         />
 
-        {/* Bio + Info */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
-
-          {/* Bio text */}
-          <div className="space-y-6">
+        {/* Bio + Info Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+          {/* Bio text column (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -267,47 +276,38 @@ const About = () => {
             </motion.div>
           </div>
 
-          {/* Info card + Timeline */}
-          <div className="space-y-6">
-            {/* Quick info */}
+          {/* Info Card column (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="glass-card p-6"
+              className="glass-card p-6 h-full flex flex-col justify-between"
             >
-              <div className="flex items-center gap-3 mb-5">
-                <img src={profileLogo} alt="Haikal" className="w-14 h-14 rounded-xl object-cover" />
-                <div>
-                  <h3 className="text-white font-bold text-lg" style={{ fontFamily: 'Archivo, sans-serif' }}>Haikal Mabrur</h3>
-                  <p className="text-slate-400 text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Student Developer · Indonesia</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                {infoCards.map(({ icon: Icon, label, value }) => (
-                  <div key={label} className="flex items-start gap-2 p-3 rounded-xl bg-white/5 border border-white/5">
-                    <Icon size={14} className="text-primary-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-slate-500 text-xs" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{label}</p>
-                      <p className="text-white text-sm font-medium" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{value}</p>
-                    </div>
+              <div>
+                <div className="flex items-center gap-3 mb-5">
+                  <img src={profileLogo} alt="Haikal" className="w-14 h-14 rounded-xl object-cover border border-white/5" />
+                  <div>
+                    <h3 className="text-white font-bold text-lg" style={{ fontFamily: 'Archivo, sans-serif' }}>Haikal Mabrur</h3>
+                    <p className="text-slate-400 text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Student Developer · Indonesia</p>
                   </div>
-                ))}
-              </div>
-
-              {/* Education */}
-              <div className="mt-4 p-3 rounded-xl border border-primary/20 bg-primary/5">
-                <div className="flex items-center gap-2 mb-1">
-                  <GraduationCap size={14} className="text-primary-400" />
-                  <span className="text-xs font-semibold text-primary-300 uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Education</span>
                 </div>
-                <p className="text-white text-sm font-semibold" style={{ fontFamily: 'Archivo, sans-serif' }}>MAN 1 Muara Enim</p>
-                <p className="text-slate-400 text-xs mt-0.5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Science Major · 2024–2027</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {infoCards.map(({ icon: Icon, label, value }) => (
+                    <div key={label} className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5 border border-white/5">
+                      <Icon size={14} className="text-primary-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-slate-500 text-xs" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{label}</p>
+                        <p className="text-white text-sm font-semibold" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Social links */}
-              <div className="mt-4 flex gap-2">
+              {/* Social links row */}
+              <div className="mt-6 flex gap-2">
                 {[
                   { icon: Github,   href: 'https://github.com/AnakTentara',          label: 'GitHub' },
                   { icon: Linkedin, href: 'https://linkedin.com/in/haikal-mabrur',    label: 'LinkedIn' },
@@ -319,7 +319,7 @@ const About = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium text-slate-300 border border-white/10 hover:border-white/20 hover:bg-white/8 transition-all duration-200 cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 border border-white/10 hover:border-white/20 hover:bg-white/8 hover:text-white transition-all duration-200 cursor-pointer"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   >
                     <Icon size={14} />
@@ -328,25 +328,79 @@ const About = () => {
                 ))}
               </div>
             </motion.div>
+          </div>
+        </div>
 
-            {/* Timeline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="glass-card p-6"
-            >
-              <h3 className="text-base font-bold text-white mb-5" style={{ fontFamily: 'Archivo, sans-serif' }}>My Coding Journey</h3>
-              {timeline.map((item, i) => (
-                <TimelineItem key={i} {...item} delay={i * 0.07} />
-              ))}
-            </motion.div>
+        {/* Horizontal Coding Journey Timeline Showcase */}
+        <div ref={timelineRef} className="mb-24 relative">
+          <h3
+            className="text-2xl font-black text-center text-white mb-12"
+            style={{ fontFamily: 'Archivo, sans-serif' }}
+          >
+            My Coding <span className="grad-text">Journey</span>
+          </h3>
+
+          {/* Desktop Timeline Track Line */}
+          <div className="hidden md:block absolute left-10 right-10 top-1/2 -translate-y-4 h-[2px] bg-white/5 z-0">
+            <div 
+              ref={lineRef}
+              className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 origin-left"
+              style={{ transform: 'scaleX(0)' }}
+            />
+          </div>
+
+          {/* Horizontal Track Grid */}
+          <div className="flex md:grid md:grid-cols-5 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory gap-5 pb-6 md:pb-0 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 relative z-10">
+            {timeline.map((item, idx) => (
+              <div 
+                key={idx} 
+                ref={el => cardRefs.current[idx] = el}
+                className="min-w-[260px] md:min-w-0 flex-1 snap-center flex flex-col items-center text-center opacity-0"
+              >
+                {/* Connecting Dot/Node */}
+                <div className="relative mb-6 flex items-center justify-center">
+                  <div 
+                    ref={el => dotRefs.current[idx] = el}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 relative z-10 ${
+                      item.active 
+                        ? 'bg-primary text-white shadow-[0_0_20px_rgba(59,130,246,0.6)] border border-primary-200' 
+                        : 'bg-slate-900 border border-white/10 text-slate-400'
+                    }`}
+                  >
+                    <item.icon size={16} />
+                  </div>
+                  {/* Decorative pulse ring for active state */}
+                  {item.active && (
+                    <div className="absolute w-12 h-12 rounded-full border border-primary/40 animate-ping opacity-75" />
+                  )}
+                </div>
+
+                {/* Timeline Card */}
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className={`glass-card p-5 w-full border ${
+                    item.active ? 'border-primary/25 bg-slate-950/50' : 'border-white/5 bg-slate-950/20'
+                  }`}
+                >
+                  <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full inline-block mb-3 ${
+                    item.active ? 'bg-primary/20 text-primary-300' : 'bg-white/5 text-slate-400'
+                  }`} style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                    {item.year}
+                  </span>
+                  <h4 className="text-white font-bold text-base mb-1" style={{ fontFamily: 'Archivo, sans-serif' }}>
+                    {item.title}
+                  </h4>
+                  <p className="text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                    {item.subtitle}
+                  </p>
+                </motion.div>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Skills grid */}
-        <div className="mb-16">
+        <div className="mb-20">
           <h3
             className="text-2xl font-black text-center text-white mb-8"
             style={{ fontFamily: 'Archivo, sans-serif' }}
