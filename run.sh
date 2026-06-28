@@ -29,6 +29,7 @@ if [ -f "package.json" ]; then
     if [ "$REBUILD" = true ]; then
         export VITE_API_BASE="$CURRENT_API_BASE"
         echo "[HaikalDev] Rebuilding frontend assets..."
+        chmod -R +x node_modules/.bin 2>/dev/null || true
         npm run build
         echo "$CURRENT_API_BASE" > "$CACHED_URL_FILE"
     fi
