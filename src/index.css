@@ -10,12 +10,12 @@
    ============================================ */
 :root {
   /* Core Colors */
-  --color-bg:        #080C18;
-  --color-bg-2:      #0B1120;
-  --color-surface:   #0F172A;
-  --color-surface-2: #1E293B;
-  --color-border:    rgba(255,255,255,0.08);
-  --color-border-lg: rgba(255,255,255,0.15);
+  --color-bg:        #060814;
+  --color-bg-2:      #090D1A;
+  --color-surface:   #0D1222;
+  --color-surface-2: #161C30;
+  --color-border:    rgba(255,255,255,0.06);
+  --color-border-lg: rgba(255,255,255,0.12);
 
   /* Brand */
   --color-primary:   #3B82F6;
@@ -26,20 +26,20 @@
   --color-pink:      #EC4899;
 
   /* Text */
-  --color-text:      #F1F5F9;
+  --color-text:      #F8FAFC;
   --color-text-muted:#94A3B8;
-  --color-text-dim:  #475569;
+  --color-text-dim:  #64748B;
 
   /* Glass */
-  --glass-bg:        rgba(15,23,42,0.6);
-  --glass-bg-light:  rgba(30,41,59,0.5);
-  --glass-border:    rgba(255,255,255,0.1);
-  --glass-shadow:    0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+  --glass-bg:        rgba(10, 15, 30, 0.55);
+  --glass-bg-light:  rgba(15, 22, 42, 0.35);
+  --glass-border:    rgba(255, 255, 255, 0.07);
+  --glass-shadow:    0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
-  --glass-card-bg:          rgba(15, 23, 42, 0.7);
-  --glass-card-border:      rgba(255, 255, 255, 0.08);
-  --glass-card-shadow:      0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.08);
-  --glass-card-shadow-hover: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.12);
+  --glass-card-bg:          rgba(10, 15, 30, 0.45);
+  --glass-card-border:      rgba(255, 255, 255, 0.06);
+  --glass-card-shadow:      0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --glass-card-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
   /* Typography */
   --font-heading:    'Archivo', sans-serif;
@@ -52,8 +52,8 @@
   --grad-subtle:     linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
 
   /* Blur */
-  --blur-glass:      blur(20px) saturate(180%);
-  --blur-heavy:      blur(40px) saturate(200%);
+  --blur-glass:      blur(24px) saturate(180%);
+  --blur-heavy:      blur(48px) saturate(200%);
 
   /* Radius */
   --radius-sm:       8px;
@@ -81,24 +81,24 @@
 html:not(.dark) {
   --color-bg:        #F8FAFC;
   --color-bg-2:      #F1F5F9;
-  --color-surface:   #E2E8F0;
-  --color-surface-2: #CBD5E1;
-  --color-border:    rgba(15,23,42,0.08);
-  --color-border-lg: rgba(15,23,42,0.15);
+  --color-surface:   #FFFFFF;
+  --color-surface-2: #F1F5F9;
+  --color-border:    rgba(15,23,42,0.06);
+  --color-border-lg: rgba(15,23,42,0.1);
 
   --color-text:      #0F172A;
   --color-text-muted:#475569;
-  --color-text-dim:  #94A3B8;
+  --color-text-dim:  #64748B;
 
   --glass-bg:        rgba(255, 255, 255, 0.45);
-  --glass-bg-light:  rgba(255, 255, 255, 0.3);
-  --glass-border:    rgba(15, 23, 42, 0.08);
-  --glass-shadow:    0 8px 32px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(15, 23, 42, 0.02);
+  --glass-bg-light:  rgba(255, 255, 255, 0.25);
+  --glass-border:    rgba(255, 255, 255, 0.4);
+  --glass-shadow:    0 8px 32px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
-  --glass-card-bg:          rgba(255, 255, 255, 0.6);
-  --glass-card-border:      rgba(15, 23, 42, 0.08);
-  --glass-card-shadow:      0 4px 24px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255,255,255,0.6);
-  --glass-card-shadow-hover: 0 8px 40px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+  --glass-card-bg:          rgba(255, 255, 255, 0.45);
+  --glass-card-border:      rgba(255, 255, 255, 0.4);
+  --glass-card-shadow:      0 8px 32px rgba(31, 38, 135, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --glass-card-shadow-hover: 0 12px 40px rgba(31, 38, 135, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 /* ============================================
@@ -323,13 +323,22 @@ p, span, a, li {
 .orb-blue {
   background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
 }
+html:not(.dark) .orb-blue {
+  background: radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 70%);
+}
 
 .orb-purple {
   background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%);
 }
+html:not(.dark) .orb-purple {
+  background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+}
 
 .orb-teal {
   background: radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 70%);
+}
+html:not(.dark) .orb-teal {
+  background: radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%);
 }
 
 /* ============================================

@@ -28,7 +28,7 @@ const ContactCard = ({ icon: Icon, title, value, color, action }) => {
       whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
       onClick={handleAction}
-      className="glass-card relative overflow-hidden p-5 flex items-center gap-4 cursor-pointer border border-white/5 bg-slate-950/40 backdrop-blur-md rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-white/15 transition-all"
+      className="glass-card relative overflow-hidden p-5 flex items-center gap-4 cursor-pointer hover:border-slate-350 dark:hover:border-white/15 transition-all"
     >
       {/* Decorative Blur Corner */}
       <div 
@@ -44,15 +44,15 @@ const ContactCard = ({ icon: Icon, title, value, color, action }) => {
       </div>
 
       <div className="flex-1 min-w-0">
-        <h4 className="text-slate-400 text-xs font-semibold uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+        <h4 className="text-slate-505 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
           {title}
         </h4>
-        <p className="text-white font-medium text-sm mt-0.5 truncate">
+        <p className="text-slate-900 dark:text-white font-medium text-sm mt-0.5 truncate">
           {value}
         </p>
       </div>
 
-      <div className="text-slate-400 hover:text-white transition-colors">
+      <div className="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
         {action ? (
           <ExternalLinkIcon size={16} className="text-slate-500" />
         ) : (
@@ -175,7 +175,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight"
+            className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight"
             style={{ fontFamily: 'Archivo, sans-serif' }}
           >
             Let's <span className="grad-text">Connect</span>
@@ -185,7 +185,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
+            className="text-slate-655 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             Have a project in mind, want to collaborate, or just want to chat? Fill out the form or reach out directly.
@@ -205,7 +205,7 @@ const Contact = () => {
           {/* Left Column: Direct Info & Socials */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-4">
-              <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'Archivo, sans-serif' }}>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2" style={{ fontFamily: 'Archivo, sans-serif' }}>
                 Contact Info
               </h3>
               {contactInfo.map((info, idx) => (
@@ -215,7 +215,7 @@ const Contact = () => {
 
             {/* Social Links Row */}
             <div className="pt-6">
-              <h4 className="text-white font-bold text-sm mb-4" style={{ fontFamily: 'Archivo, sans-serif' }}>
+              <h4 className="text-slate-900 dark:text-white font-bold text-sm mb-4" style={{ fontFamily: 'Archivo, sans-serif' }}>
                 Find Me On
               </h4>
               <div className="flex gap-3">
@@ -227,7 +227,7 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -2 }}
                     whileTap={{ scale: 0.9 }}
-                    className="flex items-center justify-center w-11 h-11 rounded-full border border-white/5 text-slate-300 hover:text-white transition-all shadow-md relative group overflow-hidden"
+                    className="flex items-center justify-center w-11 h-11 rounded-full border border-slate-200 dark:border-white/5 text-slate-550 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-md relative group overflow-hidden"
                     style={{ background: social.color }}
                   >
                     <div 
@@ -240,7 +240,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl border border-white/5 bg-slate-950/20 text-slate-500 text-xs">
+            <div className="p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-slate-950/20 text-slate-500 text-xs">
               <p className="leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 Response Time: <span className="text-emerald-400 font-semibold">Usually within 24 hours</span>. I prioritize client requests and active development updates.
               </p>
@@ -249,8 +249,8 @@ const Contact = () => {
 
           {/* Right Column: Premium Form */}
           <div className="lg:col-span-7">
-            <div className="glass-card p-6 md:p-8 border border-white/5 bg-slate-950/30 backdrop-blur-md rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-              <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
+            <div className="glass-card p-6 md:p-8 hover:border-[var(--glass-card-border)]">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
                 Send Message
               </h3>
 
@@ -263,7 +263,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
+                    className="w-full bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
                     placeholder="Your Name"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   />
@@ -277,7 +277,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
+                    className="w-full bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
                     placeholder="Email Address"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   />
@@ -291,7 +291,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
+                    className="w-full bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
                     placeholder="Subject"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   />
@@ -305,7 +305,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     rows="4"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm resize-none"
+                    className="w-full bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm resize-none"
                     placeholder="Message Details..."
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   />

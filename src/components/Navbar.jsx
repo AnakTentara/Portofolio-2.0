@@ -127,10 +127,10 @@ const Navbar = () => {
 
       <div className="max-w-5xl mx-auto">
         <motion.div
-          className={`relative rounded-2xl px-5 md:px-7 py-3 md:py-3 transition-all duration-500 bg-white/5 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${
-            scrolled ? 'backdrop-blur-2xl bg-white/10 dark:bg-[#070b13]/85 border-white/10 dark:border-white/8' : 'backdrop-blur-xl'
+          className={`relative rounded-2xl px-5 md:px-7 py-3 md:py-3 transition-all duration-500 bg-white/20 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 shadow-md dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${
+            scrolled ? 'backdrop-blur-2xl bg-white/80 dark:bg-[#070b13]/85 border-slate-300/60 dark:border-white/8' : 'backdrop-blur-xl'
           }`}
-          style={{ backdropFilter: 'blur(20px) saturate(180%)' }}
+          style={{ backdropFilter: 'blur(24px) saturate(180%)' }}
         >
           {/* Top light glow reflection */}
           <div
@@ -151,7 +151,7 @@ const Navbar = () => {
                 <img src={$iconGR} alt="HaikalDev Logo" className="w-8 h-8 relative z-10" />
               </motion.div>
               <span
-                className="font-heading font-bold text-base md:text-lg text-white tracking-tight"
+                className="font-heading font-bold text-base md:text-lg text-slate-900 dark:text-white tracking-tight"
                 style={{ fontFamily: 'Archivo, sans-serif' }}
               >
                 Haikal<span className="grad-text">Dev</span>
@@ -164,7 +164,9 @@ const Navbar = () => {
               <button
                 onClick={() => handleNavClick('home')}
                 className={`relative px-4 py-2 text-sm font-medium transition-colors font-body cursor-pointer ${
-                  location.pathname === '/' && activeSection === 'home' ? 'text-white' : 'text-slate-400 hover:text-white'
+                  location.pathname === '/' && activeSection === 'home' 
+                    ? 'text-slate-900 dark:text-white font-semibold' 
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >
@@ -176,7 +178,9 @@ const Navbar = () => {
                 <button
                   onClick={() => handleNavClick('about')}
                   className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors font-body cursor-pointer ${
-                    location.pathname === '/' && activeSection === 'about' ? 'text-white' : 'text-slate-400 hover:text-white'
+                    location.pathname === '/' && activeSection === 'about' 
+                      ? 'text-slate-900 dark:text-white font-semibold' 
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                   style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                 >
@@ -185,17 +189,17 @@ const Navbar = () => {
                 </button>
                 {/* Dropdown Container */}
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover/dropdown:opacity-100 group-hover/dropdown:pointer-events-auto transition-all duration-300 z-50">
-                  <div className="glass-card p-2 w-48 bg-slate-950/85 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl flex flex-col">
+                  <div className="glass-card p-2 w-48 bg-white/90 dark:bg-slate-950/85 backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-xl shadow-2xl flex flex-col">
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-all text-left"
+                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-all text-left"
                     >
                       <User size={13} />
                       About Overview
                     </button>
                     <Link
                       to="/more-about"
-                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-all"
                     >
                       <HeartHandshake size={13} />
                       More About Me
@@ -209,7 +213,9 @@ const Navbar = () => {
                 <button
                   onClick={() => handleNavClick('projects')}
                   className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors font-body cursor-pointer ${
-                    location.pathname === '/' && activeSection === 'projects' ? 'text-white' : 'text-slate-400 hover:text-white'
+                    location.pathname === '/' && activeSection === 'projects' 
+                      ? 'text-slate-900 dark:text-white font-semibold' 
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                   style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                 >
@@ -218,17 +224,17 @@ const Navbar = () => {
                 </button>
                 {/* Dropdown Container */}
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover/dropdown:opacity-100 group-hover/dropdown:pointer-events-auto transition-all duration-300 z-50">
-                  <div className="glass-card p-2 w-48 bg-slate-950/85 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl flex flex-col">
+                  <div className="glass-card p-2 w-48 bg-white/90 dark:bg-slate-950/85 backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-xl shadow-2xl flex flex-col">
                     <button
                       onClick={() => handleNavClick('projects')}
-                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-all text-left"
+                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-all text-left"
                     >
                       <Layers size={13} />
                       Featured Projects
                     </button>
                     <Link
                       to="/more-projects"
-                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                      className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-all"
                     >
                       <FolderHeart size={13} />
                       Projects Archive
@@ -241,7 +247,9 @@ const Navbar = () => {
               <button
                 onClick={() => handleNavClick('contact')}
                 className={`relative px-4 py-2 text-sm font-medium transition-colors font-body cursor-pointer ${
-                  location.pathname === '/' && activeSection === 'contact' ? 'text-white' : 'text-slate-400 hover:text-white'
+                  location.pathname === '/' && activeSection === 'contact' 
+                    ? 'text-slate-900 dark:text-white font-semibold' 
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >
@@ -256,7 +264,7 @@ const Navbar = () => {
                 onClick={toggleTheme}
                 whileHover={{ scale: 1.1, rotate: 15 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 hover:text-white transition-all cursor-pointer"
+                className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer"
                 title="Change Theme Mode"
               >
                 {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
@@ -283,14 +291,14 @@ const Navbar = () => {
               <motion.button
                 onClick={toggleTheme}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300"
+                className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-300"
               >
                 {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
               </motion.button>
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+                className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all cursor-pointer"
                 aria-label="Toggle menu"
               >
                 {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -307,13 +315,13 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="mt-2 rounded-2xl overflow-hidden border border-white/10 bg-slate-950/95 backdrop-blur-2xl"
+              className="mt-2 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-xl"
             >
               <div className="p-3 space-y-1">
                 {/* Home */}
                 <button
                   onClick={() => handleNavClick('home')}
-                  className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                  className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                   style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                 >
                   Home
@@ -323,7 +331,7 @@ const Navbar = () => {
                 <div className="space-y-1">
                   <button
                     onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   >
                     <span>About</span>
@@ -333,13 +341,13 @@ const Navbar = () => {
                     <div className="pl-4 space-y-1">
                       <button
                         onClick={() => handleNavClick('about')}
-                        className="w-full text-left px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                        className="w-full text-left px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                       >
                         About Overview
                       </button>
                       <Link
                         to="/more-about"
-                        className="block px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                        className="block px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                       >
                         More About Me
                       </Link>
@@ -351,7 +359,7 @@ const Navbar = () => {
                 <div className="space-y-1">
                   <button
                     onClick={() => setMobileProjectsOpen(!mobileProjectsOpen)}
-                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   >
                     <span>Projects</span>
@@ -361,13 +369,13 @@ const Navbar = () => {
                     <div className="pl-4 space-y-1">
                       <button
                         onClick={() => handleNavClick('projects')}
-                        className="w-full text-left px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                        className="w-full text-left px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                       >
                         Featured Projects
                       </button>
                       <Link
                         to="/more-projects"
-                        className="block px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                        className="block px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                       >
                         Projects Archive
                       </Link>
@@ -378,7 +386,7 @@ const Navbar = () => {
                 {/* Contact */}
                 <button
                   onClick={() => handleNavClick('contact')}
-                  className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+                  className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
                   style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                 >
                   Contact

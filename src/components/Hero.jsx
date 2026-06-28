@@ -218,7 +218,7 @@ const Hero = () => {
       className="relative min-h-screen overflow-hidden pt-20 md:pt-24 flex items-center"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-dark" />
+      <div className="absolute inset-0 bg-[var(--color-bg)] transition-colors duration-500" />
       <div className="absolute inset-0 grid-pattern opacity-30" />
 
       {/* Orbs */}
@@ -249,7 +249,7 @@ const Hero = () => {
               {/* Heading */}
               <div ref={titleRef} style={{ opacity: 0 }}>
                 <h1
-                  className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight tracking-tight"
+                  className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white leading-tight tracking-tight"
                   style={{ fontFamily: 'Archivo, sans-serif' }}
                 >
                   Hi, I'm{' '}
@@ -268,7 +268,7 @@ const Hero = () => {
                   </span>
                 </h1>
                 <div
-                  className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold text-slate-300 leading-tight"
+                  className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold text-slate-700 dark:text-slate-300 leading-tight"
                   style={{ fontFamily: 'Archivo, sans-serif' }}
                 >
                   a <RoleRotator />
@@ -278,7 +278,7 @@ const Hero = () => {
               {/* Description */}
               <p
                 ref={descRef}
-                className="text-base md:text-lg text-slate-400 max-w-md mx-auto lg:mx-0 leading-relaxed"
+                className="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-md mx-auto lg:mx-0 leading-relaxed"
                 style={{ opacity: 0, fontFamily: 'Space Grotesk, sans-serif' }}
               >
                 A passionate teenager from Indonesia, exploring tech, building projects, and creating
@@ -293,9 +293,9 @@ const Hero = () => {
                 {skills.map(({ icon: Icon, label }) => (
                   <div
                     key={label}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 border border-white/10 cursor-default"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-white/10 cursor-default"
                     style={{
-                      background: 'rgba(255,255,255,0.04)',
+                      background: 'var(--glass-bg-light)',
                       backdropFilter: 'blur(10px)',
                       fontFamily: 'Space Grotesk, sans-serif',
                       opacity: 0
@@ -386,11 +386,11 @@ const Hero = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.5, duration: 0.6 }}
-                  className="absolute -left-6 top-1/4 glass rounded-xl px-3 py-2 border border-white/10"
+                  className="absolute -left-6 top-1/4 glass rounded-xl px-3 py-2 border border-slate-200/50 dark:border-white/10"
                 >
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-xs font-medium text-white whitespace-nowrap" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                    <span className="text-xs font-medium text-slate-800 dark:text-white whitespace-nowrap" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                       5+ years exp
                     </span>
                   </div>
@@ -400,10 +400,10 @@ const Hero = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.8, duration: 0.6 }}
-                  className="absolute -right-6 bottom-1/4 glass rounded-xl px-3 py-2 border border-white/10"
+                  className="absolute -right-6 bottom-1/4 glass rounded-xl px-3 py-2 border border-slate-200/50 dark:border-white/10"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium text-white whitespace-nowrap" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                    <span className="text-xs font-medium text-slate-800 dark:text-white whitespace-nowrap" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                       15+ Projects
                     </span>
                     <ChevronRight size={12} className="text-primary-400" />
@@ -426,8 +426,8 @@ const Hero = () => {
         <div className="flex flex-col items-center gap-2">
           <span className="text-xs text-slate-500 tracking-widest uppercase" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Scroll</span>
           <div
-            className="w-8 h-12 rounded-full border border-white/20 flex justify-center items-start pt-2"
-            style={{ background: 'rgba(255,255,255,0.04)' }}
+            className="w-8 h-12 rounded-full border border-slate-300 dark:border-white/20 flex justify-center items-start pt-2"
+            style={{ background: 'var(--glass-bg-light)' }}
           >
             <motion.div
               className="w-1 h-2 rounded-full bg-primary-400"

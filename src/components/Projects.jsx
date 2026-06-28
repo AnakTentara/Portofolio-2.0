@@ -85,14 +85,14 @@ const ProjectCard = ({ project, index }) => {
       <TiltCard
         isHovered={isHovered}
         setIsHovered={setIsHovered}
-        className="glass-card overflow-hidden h-full border border-white/5 bg-slate-950/40 backdrop-blur-md rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-white/15"
+        className="glass-card overflow-hidden h-full hover:border-slate-300 dark:hover:border-white/15"
       >
         <div className="flex flex-col h-full">
           {/* Project Image & Gradient Overlay */}
           <div className="relative h-52 overflow-hidden rounded-t-2xl">
             <motion.div
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/90 z-10"
-              animate={{ opacity: isHovered ? 0.4 : 0.6 }}
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0d1222] z-10"
+              animate={{ opacity: isHovered ? 0.3 : 0.5 }}
             />
             <motion.img
               src={project.image}
@@ -113,7 +113,7 @@ const ProjectCard = ({ project, index }) => {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 text-slate-200 bg-slate-900/80 backdrop-blur-md rounded-full border border-white/10 hover:bg-slate-800 hover:text-white transition-all shadow-md"
+                  className="flex items-center justify-center w-9 h-9 text-slate-700 dark:text-slate-200 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-all shadow-md"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Github size={16} />
@@ -124,7 +124,7 @@ const ProjectCard = ({ project, index }) => {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 text-white bg-primary/80 backdrop-blur-md rounded-full border border-white/10 hover:bg-primary transition-all shadow-md"
+                  className="flex items-center justify-center w-9 h-9 text-white bg-primary/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-primary transition-all shadow-md"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <ExternalLink size={15} />
@@ -137,14 +137,14 @@ const ProjectCard = ({ project, index }) => {
           <div className="p-6 flex-1 flex flex-col justify-between" style={{ transform: 'translateZ(20px)' }}>
             <div>
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20 text-primary-400">
+                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20 text-primary-600 dark:text-primary-400">
                   <project.icon size={18} />
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight" style={{ fontFamily: 'Archivo, sans-serif' }}>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight" style={{ fontFamily: 'Archivo, sans-serif' }}>
                   {project.title}
                 </h3>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+              <p className="text-slate-650 dark:text-slate-400 text-sm leading-relaxed mb-5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 {project.description}
               </p>
             </div>
@@ -155,7 +155,7 @@ const ProjectCard = ({ project, index }) => {
                 {project.technologies.map((tech, index) => (
                   <span
                     key={index}
-                    className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-slate-300 font-medium"
+                    className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-300 font-medium"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   >
                     {tech}
@@ -269,7 +269,7 @@ const Projects = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight"
+            className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight"
             style={{ fontFamily: 'Archivo, sans-serif' }}
           >
             Featured <span className="grad-text">Projects</span>
@@ -279,7 +279,7 @@ const Projects = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
+            className="text-slate-650 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             A curated selection of things I've built, reflecting my journey across web, Minecraft development, and automation.
@@ -295,7 +295,7 @@ const Projects = () => {
 
         {/* Category Selector Tabs */}
         <div className="flex justify-center gap-2 mb-12">
-          <div className="inline-flex p-1 rounded-full bg-white/5 border border-white/5 backdrop-blur-md">
+          <div className="inline-flex p-1 rounded-full bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/5 backdrop-blur-md">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -303,7 +303,7 @@ const Projects = () => {
                 className={`relative px-6 py-2 text-sm font-semibold rounded-full transition-all duration-300 ${
                   selectedCategory === cat 
                     ? 'text-white bg-primary shadow-lg shadow-primary/20' 
-                    : 'text-slate-400 hover:text-slate-200'
+                    : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
                 }`}
                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >

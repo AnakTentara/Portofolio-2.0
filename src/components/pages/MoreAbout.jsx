@@ -108,13 +108,13 @@ const MoreAbout = () => {
     <div 
       id="more-about" 
       ref={sectionRef}
-      className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden"
+      className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-[#060814] dark:to-[#090d1a] text-slate-800 dark:text-white overflow-hidden transition-colors duration-500"
     >
       {/* Animated background particles */}
       <div className="fixed inset-0 z-0">
         <div className="absolute top-20 -left-20 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl"></div>
         <div className="absolute bottom-40 -right-20 w-96 h-96 rounded-full bg-purple-500/10 blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-b from-transparent to-black/80 z-0"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-b from-transparent to-slate-50/20 dark:to-black/80 z-0"></div>
       </div>
 
       <div className="relative z-10 pt-24 pb-16 container mx-auto px-4">
@@ -152,7 +152,7 @@ const MoreAbout = () => {
           className="mb-20"
         >
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 backdrop-blur-md rounded-2xl p-8 border border-gray-700/30 shadow-xl">
+            <div className="glass-card p-8 hover:border-[var(--glass-card-border)]">
               <div className="flex items-center mb-6">
                 <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-400 mr-4">
                   <FaUserGraduate size={24} />
@@ -160,7 +160,7 @@ const MoreAbout = () => {
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-300 to-purple-400 bg-clip-text text-transparent">Background</h2>
               </div>
               
-              <div className="text-gray-300 space-y-4">
+              <div className="text-slate-600 dark:text-slate-350 space-y-4">
                 <p>
                   I'm a passionate technology enthusiast from Indonesia, born in 2008.
                   My journey in tech started with gaming and gradually evolved into software development.
@@ -203,21 +203,21 @@ const MoreAbout = () => {
                 initial="initial"
                 whileHover="hover"
                 whileTap="tap"
-                className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md border border-gray-700/30 rounded-xl overflow-hidden"
+                className="glass-card overflow-hidden hover:border-[var(--glass-card-border)]"
               >
                 <div className="p-6">
                   <div className="flex items-center mb-4">
                     <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-400 mr-3">
                       <skillGroup.icon size={20} />
                     </div>
-                    <h3 className="text-xl font-semibold text-white">{skillGroup.category}</h3>
+                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{skillGroup.category}</h3>
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mt-4">
                     {skillGroup.items.map((skill, idx) => (
                       <span 
                         key={idx}
-                        className="px-3 py-1 bg-white/10 rounded-full text-sm text-gray-300"
+                        className="px-3 py-1 bg-slate-100 dark:bg-white/10 border border-slate-200/50 dark:border-none rounded-full text-sm text-slate-600 dark:text-gray-300"
                       >
                         {skill}
                       </span>
@@ -272,7 +272,7 @@ const MoreAbout = () => {
                 initial="initial"
                 whileHover="hover"
                 whileTap="tap"
-                className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md border border-gray-700/30 rounded-xl overflow-hidden"
+                className="glass-card overflow-hidden hover:border-[var(--glass-card-border)]"
               >
                 <div className="relative overflow-hidden p-6">
                   {/* Background glow effect */}
@@ -281,8 +281,8 @@ const MoreAbout = () => {
                   <div className="flex items-center">
                     <div className="text-3xl mr-3">{spec.icon}</div>
                     <div>
-                      <h3 className="text-xl font-bold text-white">{spec.title}</h3>
-                      <p className="text-blue-300">{spec.subtitle}</p>
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white">{spec.title}</h3>
+                      <p className="text-primary-650 dark:text-primary-300">{spec.subtitle}</p>
                     </div>
                   </div>
                 </div>
@@ -300,9 +300,9 @@ const MoreAbout = () => {
         >
           <Link to="/">
             <motion.div
-              whileHover={{ scale: 1.05, y: -5 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-full flex items-center shadow-lg shadow-blue-600/20"
+              className="btn-outline flex items-center px-8 py-3 cursor-pointer shadow-sm"
             >
               <FaHome className="mr-2" />
               Back to Home
@@ -311,9 +311,9 @@ const MoreAbout = () => {
           
           <Link to="/downloads">
             <motion.div
-              whileHover={{ scale: 1.05, y: -5 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-full flex items-center shadow-lg shadow-purple-600/20"
+              className="btn-primary flex items-center px-8 py-3 cursor-pointer shadow-lg"
             >
               <FaDownload className="mr-2" />
               Downloads

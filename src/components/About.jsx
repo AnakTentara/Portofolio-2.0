@@ -36,7 +36,7 @@ const SectionHeader = ({ title, subtitle, eyebrow }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight"
+        className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight"
         style={{ fontFamily: 'Archivo, sans-serif' }}
       >
         {title}
@@ -46,7 +46,7 @@ const SectionHeader = ({ title, subtitle, eyebrow }) => {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
+          className="text-slate-600 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
           style={{ fontFamily: 'Space Grotesk, sans-serif' }}
         >
           {subtitle}
@@ -83,12 +83,12 @@ const SkillCard = ({ icon: Icon, title, description, gradient, delay }) => {
         <Icon size={22} className="text-white" />
       </div>
       <h3
-        className="text-lg font-bold text-white mb-2"
+        className="text-lg font-bold text-slate-900 dark:text-white mb-2"
         style={{ fontFamily: 'Archivo, sans-serif' }}
       >
         {title}
       </h3>
-      <p className="text-slate-400 text-sm leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
         {description}
       </p>
     </motion.div>
@@ -102,10 +102,10 @@ const LanguageBar = ({ lang, level, color, delay }) => {
   return (
     <div ref={ref} className="space-y-1.5">
       <div className="flex justify-between items-center">
-        <span className="text-sm font-medium text-white" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{lang}</span>
+        <span className="text-sm font-medium text-slate-800 dark:text-white" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{lang}</span>
         <span className="text-xs text-slate-500" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{level}%</span>
       </div>
-      <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+      <div className="h-1.5 rounded-full bg-slate-100 dark:bg-white/5 overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={isInView ? { width: `${level}%` } : {}}
@@ -229,8 +229,8 @@ const About = () => {
               <h3 className="text-xl font-bold mb-3 grad-text" style={{ fontFamily: 'Archivo, sans-serif' }}>
                 Who am I?
               </h3>
-              <p className="text-slate-300 leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                I'm <strong className="text-white">Haikal Mabrur</strong>, a 17-year-old developer from South Sumatera, Indonesia.
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                I'm <strong className="text-slate-900 dark:text-white">Haikal Mabrur</strong>, a 17-year-old developer from South Sumatera, Indonesia.
                 Since I was 12, I've been diving deep into technology — from building HTML websites to
                 managing Minecraft servers with custom Java plugins.
               </p>
@@ -246,7 +246,7 @@ const About = () => {
               <h3 className="text-xl font-bold mb-3 grad-text-teal" style={{ fontFamily: 'Archivo, sans-serif' }}>
                 My Journey
               </h3>
-              <p className="text-slate-300 leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 What started as curiosity about how websites work grew into a full-blown passion for
                 software development. I love learning new frameworks, building communities around
                 Minecraft, and shipping projects that solve real problems.
@@ -364,7 +364,7 @@ const About = () => {
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 relative z-10 ${
                       item.active 
                         ? 'bg-primary text-white shadow-[0_0_20px_rgba(59,130,246,0.6)] border border-primary-200' 
-                        : 'bg-slate-900 border border-white/10 text-slate-400'
+                        : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400'
                     }`}
                   >
                     <item.icon size={16} />
@@ -379,18 +379,22 @@ const About = () => {
                 <motion.div
                   whileHover={{ y: -4, scale: 1.02 }}
                   className={`glass-card p-5 w-full border ${
-                    item.active ? 'border-primary/25 bg-slate-950/50' : 'border-white/5 bg-slate-950/20'
+                    item.active 
+                      ? 'border-primary/20 dark:border-primary/25 bg-primary/5 dark:bg-slate-950/50' 
+                      : 'border-slate-200 dark:border-white/5 bg-white/40 dark:bg-slate-950/20'
                   }`}
                 >
                   <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full inline-block mb-3 ${
-                    item.active ? 'bg-primary/20 text-primary-300' : 'bg-white/5 text-slate-400'
+                    item.active 
+                      ? 'bg-primary/10 dark:bg-primary/20 text-primary-600 dark:text-primary-300' 
+                      : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400'
                   }`} style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                     {item.year}
                   </span>
-                  <h4 className="text-white font-bold text-base mb-1" style={{ fontFamily: 'Archivo, sans-serif' }}>
+                  <h4 className="text-slate-900 dark:text-white font-bold text-base mb-1" style={{ fontFamily: 'Archivo, sans-serif' }}>
                     {item.title}
                   </h4>
-                  <p className="text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                  <p className="text-slate-555 dark:text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                     {item.subtitle}
                   </p>
                 </motion.div>
@@ -402,7 +406,7 @@ const About = () => {
         {/* Skills grid */}
         <div className="mb-20">
           <h3
-            className="text-2xl font-black text-center text-white mb-8"
+            className="text-2xl font-black text-center text-slate-900 dark:text-white mb-8"
             style={{ fontFamily: 'Archivo, sans-serif' }}
           >
             What I <span className="grad-text">Do</span>
@@ -423,7 +427,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="glass-card p-7"
           >
-            <h3 className="text-lg font-bold text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
               Programming Languages
             </h3>
             <div className="space-y-4">
@@ -440,7 +444,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="glass-card p-7"
           >
-            <h3 className="text-lg font-bold text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6" style={{ fontFamily: 'Archivo, sans-serif' }}>
               Human Languages
             </h3>
             <div className="space-y-4">
@@ -448,12 +452,12 @@ const About = () => {
               <LanguageBar lang="English"    level={85}  color="linear-gradient(90deg, #3B82F6, #60A5FA)" delay={0.3} />
             </div>
 
-            <div className="mt-8 p-4 rounded-xl border border-white/5 bg-white/3">
-              <p className="text-slate-300 text-sm italic leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <div className="mt-8 p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/3">
+              <p className="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 "I believe every line of code is a small step toward building something meaningful.
                 Learning never stops — and that's what makes this journey exciting."
               </p>
-              <p className="text-slate-500 text-xs mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>— Haikal Mabrur</p>
+              <p className="text-slate-400 dark:text-slate-500 text-xs mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>— Haikal Mabrur</p>
             </div>
           </motion.div>
         </div>

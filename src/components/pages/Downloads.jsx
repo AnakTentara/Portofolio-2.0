@@ -37,7 +37,7 @@ const FilePreview = ({ file }) => {
 
   if (isImage) {
     return (
-      <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/10 bg-slate-900 flex items-center justify-center">
+      <div className="w-10 h-10 rounded-lg overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-900 flex items-center justify-center">
         <img 
           src={getFilePreviewUrl(file.path)} 
           alt={file.name}
@@ -52,7 +52,7 @@ const FilePreview = ({ file }) => {
   }
 
   return (
-    <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 border border-white/5 text-slate-400">
+    <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-slate-500 dark:text-slate-400">
       {getFileIcon(file.name)}
     </div>
   );
@@ -136,7 +136,7 @@ const Downloads = () => {
   }, [filteredItems]);
 
   return (
-    <div className="min-h-screen bg-transparent text-white pt-24 md:pt-32 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent text-slate-800 dark:text-white pt-24 md:pt-32 pb-20 relative overflow-hidden">
       {/* Decorative Orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="orb orb-blue w-[400px] h-[400px] -top-20 -left-20 opacity-15" />
@@ -145,7 +145,7 @@ const Downloads = () => {
 
       <div className="container-portfolio relative z-10 max-w-5xl">
         {/* Navigation & Header Panel */}
-        <div className="glass-card p-5 md:p-6 mb-8 border border-white/5 bg-slate-950/40 backdrop-blur-md rounded-2xl shadow-xl">
+        <div className="glass-card p-5 md:p-6 mb-8 hover:border-[var(--glass-card-border)]">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
               {currentPath.length > 0 && (
@@ -153,7 +153,7 @@ const Downloads = () => {
                   whileHover={{ scale: 1.05, x: -2 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleFolderBack}
-                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 transition-all flex items-center justify-center"
+                  className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 transition-all flex items-center justify-center"
                 >
                   <ArrowLeft size={18} />
                 </motion.button>
@@ -161,11 +161,11 @@ const Downloads = () => {
               <div>
                 <div className="flex items-center gap-2">
                   <Layers size={18} className="text-primary-400" />
-                  <h1 className="text-2xl md:text-3xl font-black text-white leading-none" style={{ fontFamily: 'Archivo, sans-serif' }}>
+                  <h1 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white leading-none" style={{ fontFamily: 'Archivo, sans-serif' }}>
                     {currentPath.length === 0 ? 'Downloads' : currentPath[currentPath.length - 1]}
                   </h1>
                 </div>
-                <p className="text-slate-500 text-xs mt-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                <p className="text-slate-400 dark:text-slate-500 text-xs mt-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   Browse downloadable assets, plugins and Minecraft skins
                 </p>
               </div>
@@ -176,7 +176,7 @@ const Downloads = () => {
                 whileHover={{ scale: 1.05, rotate: 180 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={refresh}
-                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 transition-all flex items-center justify-center"
+                className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 transition-all flex items-center justify-center"
                 title="Refresh Folder"
               >
                 <RefreshCw size={16} />
@@ -186,7 +186,7 @@ const Downloads = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 transition-all flex items-center justify-center"
+                  className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 transition-all flex items-center justify-center"
                 >
                   <Home size={16} />
                 </motion.button>
@@ -195,19 +195,19 @@ const Downloads = () => {
           </div>
 
           {/* Breadcrumbs Navigation */}
-          <div className="flex items-center flex-wrap gap-1.5 text-sm text-slate-400 border-b border-white/5 pb-4 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <div className="flex items-center flex-wrap gap-1.5 text-sm text-slate-550 dark:text-slate-400 border-b border-slate-200 dark:border-white/5 pb-4 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             <button 
               onClick={() => setCurrentPath([])} 
-              className={`hover:text-white transition-colors flex items-center gap-1 ${currentPath.length === 0 ? 'text-primary-400 font-bold' : ''}`}
+              className={`hover:text-slate-900 dark:hover:text-white transition-colors flex items-center gap-1 ${currentPath.length === 0 ? 'text-primary font-bold' : 'text-slate-500 dark:text-slate-400'}`}
             >
               Downloads
             </button>
             {currentPath.map((path, idx) => (
               <React.Fragment key={idx}>
-                <ChevronRight size={14} className="text-slate-600" />
+                <ChevronRight size={14} className="text-slate-400 dark:text-slate-600" />
                 <button
                   onClick={() => setCurrentPath(currentPath.slice(0, idx + 1))}
-                  className={`hover:text-white transition-colors ${idx === currentPath.length - 1 ? 'text-primary-400 font-bold' : ''}`}
+                  className={`hover:text-slate-900 dark:hover:text-white transition-colors ${idx === currentPath.length - 1 ? 'text-primary font-bold' : 'text-slate-550 dark:text-slate-400'}`}
                 >
                   {path}
                 </button>
@@ -217,12 +217,12 @@ const Downloads = () => {
 
           {/* Explorer Search Bar */}
           <div className="relative w-full md:max-w-md">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
               <Search size={16} />
             </div>
             <input
               type="text"
-              className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm text-white placeholder-slate-500"
+              className="w-full bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
               placeholder="Search files and folders..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -232,18 +232,18 @@ const Downloads = () => {
         </div>
 
         {/* Folder / File Explorer Area */}
-        <div className="glass-card p-6 border border-white/5 bg-slate-950/30 backdrop-blur-md rounded-2xl shadow-xl min-h-[300px]">
+        <div className="glass-card p-6 min-h-[300px] hover:border-[var(--glass-card-border)]">
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 text-slate-400 gap-3">
+            <div className="flex flex-col items-center justify-center py-20 text-slate-450 dark:text-slate-400 gap-3">
               <Loader2 className="w-10 h-10 animate-spin text-primary" />
               <p className="text-sm font-medium" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Loading directory contents...</p>
             </div>
           ) : error ? (
-            <div className="flex flex-col items-center justify-center py-20 text-slate-400 gap-4 text-center">
+            <div className="flex flex-col items-center justify-center py-20 text-slate-500 dark:text-slate-400 gap-4 text-center">
               <AlertTriangle className="w-12 h-12 text-rose-500" />
               <div>
-                <p className="text-white font-bold text-lg" style={{ fontFamily: 'Archivo, sans-serif' }}>Connection Error</p>
-                <p className="text-slate-400 text-sm mt-1 max-w-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                <p className="text-slate-900 dark:text-white font-bold text-lg" style={{ fontFamily: 'Archivo, sans-serif' }}>Connection Error</p>
+                <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 max-w-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   {error}. Make sure the backend server is running.
                 </p>
               </div>
@@ -261,7 +261,7 @@ const Downloads = () => {
               {/* Folders Section */}
               {folders.length > 0 && (
                 <div className="space-y-3">
-                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                  <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                     Folders
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -271,20 +271,20 @@ const Downloads = () => {
                         whileHover={{ scale: 1.015, y: -2 }}
                         whileTap={{ scale: 0.985 }}
                         onClick={() => handleFolderOpen(folder.name)}
-                        className="flex items-center space-x-3.5 p-3.5 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 hover:border-white/10 transition-all duration-200 cursor-pointer"
+                        className="flex items-center space-x-3.5 p-3.5 bg-slate-50/50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 rounded-xl hover:bg-slate-100/60 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/10 transition-all duration-200 cursor-pointer"
                       >
                         <div className="p-2.5 rounded-lg bg-primary/10 text-primary border border-primary/20">
                           <Folder size={18} />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="font-semibold text-white text-sm truncate" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                          <p className="font-semibold text-slate-800 dark:text-white text-sm truncate" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                             {folder.name}
                           </p>
                           <p className="text-xs text-slate-500 mt-0.5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                             {folder.items?.length || 0} items
                           </p>
                         </div>
-                        <ChevronRight size={14} className="text-slate-600 flex-shrink-0" />
+                        <ChevronRight size={14} className="text-slate-400 dark:text-slate-600 flex-shrink-0" />
                       </motion.div>
                     ))}
                   </div>
@@ -294,7 +294,7 @@ const Downloads = () => {
               {/* Files Section */}
               {filesList.length > 0 && (
                 <div className="space-y-3">
-                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                  <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                     Files
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -304,18 +304,18 @@ const Downloads = () => {
                         <motion.div
                           key={idx}
                           whileHover={{ scale: 1.01, y: -1 }}
-                          className="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 hover:border-white/10 transition-all duration-200"
+                          className="flex items-center justify-between p-4 bg-slate-50/50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 rounded-xl hover:bg-slate-100/60 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/10 transition-all duration-200"
                         >
                           <div className="flex items-center space-x-3.5 min-w-0">
                             <FilePreview file={file} />
                             <div className="min-w-0">
-                              <p className="font-semibold text-white text-sm truncate" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                              <p className="font-semibold text-slate-800 dark:text-white text-sm truncate" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                 {file.name}
                               </p>
                               <div className="flex items-center gap-3 text-xs text-slate-500 mt-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                 <span>{getFileSize(file.size)}</span>
-                                <span className="w-1 h-1 rounded-full bg-slate-700" />
-                                <span className="text-primary-400 font-medium">{downloadCount} downloads</span>
+                                <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                                <span className="text-primary-600 dark:text-primary-400 font-medium">{downloadCount} downloads</span>
                               </div>
                             </div>
                           </div>
@@ -324,7 +324,7 @@ const Downloads = () => {
                             whileHover={{ scale: 1.08 }}
                             whileTap={{ scale: 0.92 }}
                             onClick={() => handleDownload(file)}
-                            className="p-2.5 rounded-xl bg-primary/10 border border-primary/20 text-primary-400 hover:bg-primary hover:text-white transition-all flex items-center justify-center flex-shrink-0"
+                            className="p-2.5 rounded-xl bg-primary/10 border border-primary/20 text-primary-600 dark:text-primary-400 hover:bg-primary hover:text-white transition-all flex items-center justify-center flex-shrink-0"
                             title="Download File"
                           >
                             <Download size={16} />
@@ -339,8 +339,8 @@ const Downloads = () => {
               {/* Empty State */}
               {folders.length === 0 && filesList.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-20 text-slate-500 gap-2 text-center">
-                  <Folder className="w-12 h-12 text-slate-700" />
-                  <p className="text-white font-semibold text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>This directory is empty</p>
+                  <Folder className="w-12 h-12 text-slate-400 dark:text-slate-700" />
+                  <p className="text-slate-800 dark:text-white font-semibold text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>This directory is empty</p>
                   {searchTerm && (
                     <p className="text-xs text-slate-500 max-w-xs mt-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                       No items matched "{searchTerm}". Try checking your spelling or clear search filters.
@@ -366,18 +366,18 @@ const Downloads = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="glass-card p-6 w-full max-w-sm border border-white/10 bg-slate-900/90 text-center rounded-2xl shadow-2xl"
+              className="glass-card p-6 w-full max-w-sm border border-slate-200 dark:border-white/10 bg-white/95 dark:bg-slate-900/90 text-center rounded-2xl shadow-2xl"
             >
               <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 text-primary">
                 {getFileIcon(downloadingFile.name)}
               </div>
               
-              <h3 className="text-lg font-bold text-white mb-1" style={{ fontFamily: 'Archivo, sans-serif' }}>Downloading Asset</h3>
-              <p className="text-slate-400 text-xs truncate max-w-xs mx-auto mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1" style={{ fontFamily: 'Archivo, sans-serif' }}>Downloading Asset</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-xs truncate max-w-xs mx-auto mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 {downloadingFile.name}
               </p>
               
-              <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5 mb-2">
+              <div className="w-full h-1.5 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden border border-slate-200 dark:border-white/5 mb-2">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: '100%' }}
@@ -385,7 +385,7 @@ const Downloads = () => {
                   className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
                 />
               </div>
-              <p className="text-slate-500 text-[10px]" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Streaming file from Ground Station...</p>
+              <p className="text-slate-400 dark:text-slate-500 text-[10px]" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Streaming file from Ground Station...</p>
             </motion.div>
           </motion.div>
         )}

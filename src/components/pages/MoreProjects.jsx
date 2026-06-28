@@ -54,7 +54,7 @@ const ProjectCard = ({ project, index, priority = false }) => {
       initial="initial"
       whileHover="hover"
       whileTap="tap"
-      className={`w-full ${priority ? 'col-span-1 md:col-span-2' : ''} glass-card overflow-hidden border border-white/5 bg-slate-950/40 backdrop-blur-md rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-white/12 transition-all`}
+      className={`w-full ${priority ? 'col-span-1 md:col-span-2' : ''} glass-card overflow-hidden hover:border-slate-300 dark:hover:border-white/12`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -73,8 +73,8 @@ const ProjectCard = ({ project, index, priority = false }) => {
         ) : (
           <>
             <motion.div
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/90 z-10"
-              animate={{ opacity: isHovered ? 0.4 : 0.6 }}
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0d1222] z-10"
+              animate={{ opacity: isHovered ? 0.3 : 0.5 }}
             />
             <motion.img
               src={project.image}
@@ -95,7 +95,7 @@ const ProjectCard = ({ project, index, priority = false }) => {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-11 h-11 text-white bg-slate-900/80 backdrop-blur-md rounded-full border border-white/10 hover:bg-slate-800 transition-all shadow-lg"
+                  className="flex items-center justify-center w-11 h-11 text-slate-700 dark:text-white bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -108,7 +108,7 @@ const ProjectCard = ({ project, index, priority = false }) => {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-11 h-11 text-white bg-primary/80 backdrop-blur-md rounded-full border border-white/10 hover:bg-primary transition-all shadow-lg"
+                  className="flex items-center justify-center w-11 h-11 text-white bg-primary/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-primary transition-all shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -123,16 +123,16 @@ const ProjectCard = ({ project, index, priority = false }) => {
       {/* Info Details */}
       <div className="p-6">
         <div className="flex justify-between items-start gap-3 mb-3">
-          <h3 className="text-xl font-bold text-white tracking-tight" style={{ fontFamily: 'Archivo, sans-serif' }}>
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight" style={{ fontFamily: 'Archivo, sans-serif' }}>
             {project.title}
           </h3>
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 whitespace-nowrap" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <div className="flex items-center gap-1.5 text-xs text-slate-550 dark:text-slate-500 whitespace-nowrap" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             <Calendar size={13} />
             <span>{project.date}</span>
           </div>
         </div>
 
-        <p className="text-slate-400 text-sm leading-relaxed mb-5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+        <p className="text-slate-650 dark:text-slate-400 text-sm leading-relaxed mb-5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
           {project.description}
         </p>
 
@@ -141,7 +141,7 @@ const ProjectCard = ({ project, index, priority = false }) => {
           {project.technologies.map((tech, index) => (
             <span
               key={index}
-              className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-slate-300 font-medium"
+              className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-slate-300 font-medium"
               style={{ fontFamily: 'Space Grotesk, sans-serif' }}
             >
               {tech}
@@ -149,7 +149,7 @@ const ProjectCard = ({ project, index, priority = false }) => {
           ))}
         </div>
 
-        <div className="flex justify-between items-center border-t border-white/5 pt-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+        <div className="flex justify-between items-center border-t border-slate-200 dark:border-white/5 pt-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
           <span className="text-xs text-slate-500 flex items-center gap-1.5">
             {project.isVideoEdit ? (
               <><Film size={14} className="text-rose-400" /> Video Edit</>
@@ -311,7 +311,7 @@ const MoreProjects = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-white pt-24 md:pt-32 pb-16 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent text-slate-800 dark:text-white pt-24 md:pt-32 pb-16 relative overflow-hidden">
       {/* Decorative Orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="orb orb-blue w-[450px] h-[450px] -top-20 -left-20 opacity-15" />
@@ -333,10 +333,10 @@ const MoreProjects = () => {
               Chronicle
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight" style={{ fontFamily: 'Archivo, sans-serif' }}>
+          <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight" style={{ fontFamily: 'Archivo, sans-serif' }}>
             Project <span className="grad-text">Archive</span>
           </h1>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <p className="text-slate-650 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             A complete collection of things I've built, showing my progression across software development and video editing.
           </p>
           <motion.div
@@ -357,7 +357,7 @@ const MoreProjects = () => {
           className="mb-24"
         >
           <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'Archivo, sans-serif' }}>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2" style={{ fontFamily: 'Archivo, sans-serif' }}>
               Development Projects
             </h2>
             <div className="w-12 h-[2px] bg-primary/30 mx-auto" />
@@ -385,7 +385,7 @@ const MoreProjects = () => {
           id="edit"
         >
           <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'Archivo, sans-serif' }}>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2" style={{ fontFamily: 'Archivo, sans-serif' }}>
               Video Editing Journey
             </h2>
             <div className="w-12 h-[2px] bg-primary/30 mx-auto" />

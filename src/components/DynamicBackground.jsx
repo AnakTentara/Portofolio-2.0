@@ -4,6 +4,15 @@ const DynamicBackground = ({ children }) => {
   const canvasRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [devicePerformance, setDevicePerformance] = useState('high'); // high, medium, low
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
+  
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
   
   // Detect device performance level on mount
   useEffect(() => {
@@ -129,8 +138,9 @@ const DynamicBackground = ({ children }) => {
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Solid background color instead of gradient
-      ctx.fillStyle = 'rgba(20, 10, 35, 0.8)';
+      // Solid background color based on theme
+      const isDarkTheme = document.documentElement.classList.contains('dark');
+      ctx.fillStyle = isDarkTheme ? 'rgba(6, 8, 20, 0.85)' : 'rgba(248, 250, 252, 0.85)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Update particle positions
@@ -215,9 +225,10 @@ const DynamicBackground = ({ children }) => {
       <div 
         className="fixed top-0 left-0 w-full h-full z-[-1] pointer-events-none section-blend-overlay"
         style={{
-          background: 'rgba(20, 10, 35, 0.7)',
+          backgroundColor: isDark ? 'rgba(6, 8, 20, 0.75)' : 'rgba(248, 250, 252, 0.75)',
           opacity: Math.min(1, scrollPosition / 300),
-          transform: `translateY(${Math.min(scrollPosition * 0.1, 30)}px)`
+          transform: `translateY(${Math.min(scrollPosition * 0.1, 30)}px)`,
+          transition: 'background-color 0.5s ease'
         }}
       />
       
