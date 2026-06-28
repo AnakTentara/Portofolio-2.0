@@ -28,7 +28,7 @@ const getFileIcon = (fileName) => {
 };
 
 const getFilePreviewUrl = (filePath) => {
-  return `${API_BASE}/files/download/${encodeURIComponent(filePath)}`;
+  return `${API_BASE}/files/download/${filePath.split('/').map(encodeURIComponent).join('/')}`;
 };
 
 const FilePreview = ({ file }) => {

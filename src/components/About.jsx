@@ -283,7 +283,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="glass-card p-6 h-full flex flex-col justify-between"
+              className="glass-card p-6 flex flex-col gap-6"
             >
               <div>
                 <div className="flex items-center gap-3 mb-5">

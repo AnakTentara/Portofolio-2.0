@@ -51,7 +51,7 @@ export function useDownloadApi() {
   const performDownload = useCallback(async (filePath, fileName) => {
     try {
       // 1. Trigger browser file download streaming directly from server
-      const downloadUrl = `${API_BASE}/files/download/${encodeURIComponent(filePath)}`;
+      const downloadUrl = `${API_BASE}/files/download/${filePath.split('/').map(encodeURIComponent).join('/')}`;
       
       const link = document.createElement('a');
       link.href = downloadUrl;
