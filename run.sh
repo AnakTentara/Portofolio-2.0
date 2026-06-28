@@ -7,6 +7,43 @@ fi
 FRONTEND_PORT=${FRONTEND_PORT:-$SERVER_PORT}
 BACKEND_PORT=${BACKEND_PORT:-3001}
 
+# 0. Check and Upgrade Node.js version to v22 (requires Node >= 22.5.0 for node:sqlite)
+NODE_MAJOR=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
+if [ "$NODE_MAJOR" -lt 22 ]; then
+    echo "[HaikalDev] Node.js version is older than v22 (v$(node -v)). Upgrading portable Node.js to v22.12.0..."
+    ARCH_RAW=$(uname -m)
+    if [ "$ARCH_RAW" = "aarch64" ] || [ "$ARCH_RAW" = "arm64" ]; then
+        ARCH="arm64"
+    else
+        ARCH="x64"
+    fi
+    
+    cd /home/container
+    NODE_VER="v22.12.0"
+    NODE_DIR="node-${NODE_VER}-linux-${ARCH}"
+    NODE_TAR="${NODE_DIR}.tar.xz"
+    
+    echo "[HaikalDev] Downloading Node.js ${NODE_VER} for linux-${ARCH}..."
+    if command -v curl &>/dev/null; then
+        curl -LsO "https://nodejs.org/dist/${NODE_VER}/${NODE_TAR}"
+    else
+        wget -q "https://nodejs.org/dist/${NODE_VER}/${NODE_TAR}"
+    fi
+    
+    echo "[HaikalDev] Extracting Node.js..."
+    tar -xf "${NODE_TAR}"
+    
+    rm -rf node_old
+    if [ -d "node" ]; then
+        mv node node_old
+    fi
+    mv "${NODE_DIR}" node
+    rm -rf node_old "${NODE_TAR}"
+    
+    export PATH="/home/container/node/bin:$PATH"
+    echo "[HaikalDev] Upgraded portable Node.js to $(node -v)"
+fi
+
 # 1. Setup Frontend
 if [ -f "package.json" ]; then
     if [ ! -d "node_modules" ]; then
