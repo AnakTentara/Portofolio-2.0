@@ -12,6 +12,9 @@ if [ -f "package.json" ]; then
     if [ ! -d "node_modules" ]; then
         echo "[HaikalDev] Installing frontend node modules..."
         npm install --no-audit --no-fund
+    else
+        echo "[HaikalDev] Ensuring platform-specific packages..."
+        npm rebuild esbuild --no-audit --no-fund 2>/dev/null || true
     fi
     CURRENT_API_BASE="${VITE_API_BASE}"
     CACHED_URL_FILE="/home/container/.cached_api_base"
