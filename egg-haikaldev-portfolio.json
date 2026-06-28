@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-06-28T10:58:00+07:00",
+    "name": "HaikalDev Portfolio",
+    "author": "me@haikaldev.my.id",
+    "description": "Pterodactyl Egg for HaikalDev Portfolio (React/Vite Frontend + Express Backend) featuring automatic git pull, dependency checks, and production assets building.",
+    "features": [],
+    "docker_images": {
+        "ghcr.io/parkervcp/yolks:node_20": "ghcr.io/parkervcp/yolks:node_20"
+    },
+    "file_denylist": [],
+    "startup": "if [ ! -f run.sh ]; then\n    echo \"[HaikalDev] run.sh tidak ditemukan. Menulis run.sh default...\"\n    cat << 'EOF' > run.sh\n#!/bin/bash\nset -e\necho \"[HaikalDev] Starting HaikalDev Dual-Port Launcher...\"\nif [ -d \"/home/container/node/bin\" ]; then\n    export PATH=\"/home/container/node/bin:$PATH\"\nfi\nFRONTEND_PORT=${FRONTEND_PORT:-$SERVER_PORT}\nBACKEND_PORT=${BACKEND_PORT:-3001}\n\n# 1. Automatic Git Pull\nif [ ! -d \".git\" ]; then\n    echo \"[HaikalDev] Git repository not found. Cloning from ${GIT_REPO}...\"\n    git clone -b \"${GIT_BRANCH:-master}\" \"${GIT_REPO}\" .\nelse\n    echo \"[HaikalDev] Running git pull...\"\n    git pull origin \"${GIT_BRANCH:-master}\"\nfi\n\n# 2. Setup Frontend\nif [ -f \"package.json\" ]; then\n    if [ ! -d \"node_modules\" ]; then\n        echo \"[HaikalDev] Installing frontend node modules...\"\n        npm install --no-audit --no-fund\n    fi\n    CURRENT_API_BASE=\"${VITE_API_BASE}\"\n    CACHED_URL_FILE=\"/home/container/.cached_api_base\"\n    REBUILD=false\n    if [ ! -d \"dist\" ]; then\n        REBUILD=true\n    elif [ -f \"$CACHED_URL_FILE\" ]; then\n        CACHED_URL=$(cat \"$CACHED_URL_FILE\")\n        if [ \"$CURRENT_API_BASE\" != \"$CACHED_URL\" ]; then\n            REBUILD=true\n        fi\n    else\n        REBUILD=true\n    fi\n    if [ \"$REBUILD\" = true ]; then\n        export VITE_API_BASE=\"$CURRENT_API_BASE\"\n        echo \"[HaikalDev] Rebuilding frontend assets...\"\n        npm run build\n        echo \"$CURRENT_API_BASE\" > \"$CACHED_URL_FILE\"\n    fi\nfi\n\n# 3. Setup Backend\nif [ -d \"backend\" ]; then\n    cd backend\n    if [ ! -d \"node_modules\" ]; then\n        echo \"[HaikalDev] Installing backend node modules...\"\n        npm install --no-audit --no-fund\n    fi\n    cd /home/container\nfi\n\ncleanup() {\n    kill \"$BACKEND_PID\" 2>/dev/null || true\n    kill \"$FRONTEND_PID\" 2>/dev/null || true\n    exit 0\n}\ntrap cleanup SIGINT SIGTERM EXIT\n\n# 4. Start Backend\ncd /home/container/backend\nexport PORT=\"$BACKEND_PORT\"\nnode src/server.js &\nBACKEND_PID=$!\n\n# 5. Start Frontend\nif [ -d \"/home/container/dist\" ]; then\n    cd /home/container\n    npx vite preview --port \"$FRONTEND_PORT\" --host 0.0.0.0 &\n    FRONTEND_PID=$!\nelse\n    sleep infinity &\n    FRONTEND_PID=$!\nfi\nwait -n \"$BACKEND_PID\" \"$FRONTEND_PID\"\nEOF\nfi\nchmod +x run.sh && ./run.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{ \"done\": \"Starting HaikalDev Dual-Port Launcher...\"}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/ash\n\n# =============================================================\n# HaikalDev Portfolio -- Pterodactyl Installation Script\n# Installs portable Node.js 20 into the server directory\n# =============================================================\n\nset -e\ncd /mnt/user-data/volumes/$P_SERVER_UUID\n\necho \"[HaikalDev] Memulai instalasi Node.js 20 portable...\"\n\nNODE_VER=\"v20.11.0\"\nNODE_DIR=\"node-${NODE_VER}-linux-x64\"\nNODE_TAR=\"${NODE_DIR}.tar.xz\"\n\nif [ ! -d \"node\" ]; then\n    echo \"[HaikalDev] Downloading Node.js ${NODE_VER}...\"\n    apk add --no-cache curl tar xz git\n    curl -LsO \"https://nodejs.org/dist/${NODE_VER}/${NODE_TAR}\"\n    echo \"[HaikalDev] Extracting Node.js...\"\n    tar -xf \"${NODE_TAR}\"\n    mv \"${NODE_DIR}\" node\n    rm \"${NODE_TAR}\"\n    echo \"[HaikalDev] Node.js portable installed successfully in ./node\"\nelse\n    echo \"[HaikalDev] Node.js portable already exists.\"\nfi\n\necho \"[HaikalDev] Setup completed!\"\n",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Git Repository",
+            "description": "URL Repository GitHub untuk portofolio ini.",
+            "env_variable": "GIT_REPO",
+            "default_value": "https://github.com/AnakTentara/Portofolio-2.0.git",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Branch",
+            "description": "Branch target untuk proses Git Pull.",
+            "env_variable": "GIT_BRANCH",
+            "default_value": "master",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Backend Port",
+            "description": "Port untuk Express API Server (harus di-allocate pada server).",
+            "env_variable": "BACKEND_PORT",
+            "default_value": "3001",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,5",
+            "field_type": "text"
+        },
+        {
+            "name": "Vite Backend API Base",
+            "description": "URL Backend API (misal: http://IP_KAMU:3001/api). Digunakan oleh frontend saat build.",
+            "env_variable": "VITE_API_BASE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        }
+    ]
+}

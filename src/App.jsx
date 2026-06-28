@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 import LoadingPage from './components/LoadingPage';
-import NavbarOther from './components/NavbarOther';
 import Navbar from './components/Navbar';
 import FadeUp from './components/FadeUp';
 import DynamicBackground from './components/DynamicBackground';
@@ -35,57 +34,42 @@ import porto4 from '../images/nanikoregroup.png'
 function App() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-  const [profileLoaded, setProfileLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   useEffect(() => {
-    const loadProfileImage = async () => {
-      try {
-        const profileImages = [
-          icongr,
-          icon
-        ];
+    const assets = [icongr, icon, porto1, porto2, porto3, porto4];
+    let loadedCount = 0;
+    const totalAssets = assets.length;
 
-        await Promise.all(
-          profileImages.map(src => 
-            new Promise((resolve, reject) => {
-              const img = new Image();
-              img.src = src;
-              img.onload = resolve;
-              img.onerror = reject;
-            })
-          )
-        );
+    if (totalAssets === 0) {
+      setLoadingProgress(100);
+      setIsLoading(false);
+      return;
+    }
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        setProfileLoaded(true);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Profile image loading error:", error);
-        setProfileLoaded(true);
-        setIsLoading(false);
+    const updateProgress = () => {
+      loadedCount++;
+      const percent = Math.round((loadedCount / totalAssets) * 100);
+      setLoadingProgress(percent);
+      
+      if (loadedCount === totalAssets) {
+        // Small delay for clean fade-out transition
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 800);
       }
     };
 
-    const preloadPortfolioImages = () => {
-      const portfolioImages = [
-        porto1,
-        porto2,
-        porto3,
-        porto4
-      ];
-      portfolioImages.forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
-    };
-
-    loadProfileImage();
-    preloadPortfolioImages();
+    assets.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.onload = updateProgress;
+      img.onerror = updateProgress;
+    });
   }, []);
 
   if (isLoading) {
-    return <LoadingPage />;
+    return <LoadingPage progress={loadingProgress} />;
   }
 
   return (
@@ -93,7 +77,7 @@ function App() {
       <PreventInteractions />
       <CustomCursor />
 
-      {location.pathname === '/' ? <Navbar /> : <NavbarOther />}
+      <Navbar />
 
       <Routes>
         <Route path="/" element={
