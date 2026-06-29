@@ -122,10 +122,10 @@ const Navbar = () => {
           }`}
           style={{ backdropFilter: 'blur(24px) saturate(180%)' }}
         >
-          {/* Scroll progress bar inside navbar card */}
+          {/* Scroll progress bar inside navbar card (inset to prevent rounded corner overflow) */}
           <div
             ref={progressRef}
-            className="absolute top-0 left-0 right-0 h-[2px] origin-left z-20 rounded-t-2xl"
+            className="absolute top-0 left-6 right-6 h-[2px] origin-left z-20 rounded-full"
             style={{
               background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899)',
               transform: 'scaleX(0)',
