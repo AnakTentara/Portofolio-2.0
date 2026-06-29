@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://haikaldev.my.id/sitemap.xml
