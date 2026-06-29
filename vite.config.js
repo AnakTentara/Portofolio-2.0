@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.pdf', '**/*.docx', '**/*.xlsx', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.mp3', '**/*.mp4', ],
-  base: './',
+  base: '/',
   build: {
     rollupOptions: {
       output: {
