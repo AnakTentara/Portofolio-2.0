@@ -44,6 +44,29 @@ if [ "$NODE_MAJOR" -lt 22 ]; then
     echo "[HaikalDev] Upgraded portable Node.js to $(node -v)"
 fi
 
+# 0.5. Check for Git updates
+if [ -d ".git" ]; then
+    echo "[HaikalDev] Checking for Git updates..."
+    # Fetch latest upstream changes
+    git fetch origin || echo "[HaikalDev] Git fetch failed (offline or no remote set up)."
+    
+    LOCAL=$(git rev-parse HEAD 2>/dev/null || echo "")
+    REMOTE=$(git rev-parse @{u} 2>/dev/null || echo "")
+    if [ -n "$LOCAL" ] && [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ]; then
+        BASE=$(git merge-base HEAD @{u} 2>/dev/null || echo "")
+        if [ "$LOCAL" = "$BASE" ]; then
+            echo "[HaikalDev] New Git updates detected. Pulling changes..."
+            git pull
+            echo "[HaikalDev] Deleting dist folder for recompilation..."
+            rm -rf dist
+        else
+            echo "[HaikalDev] Local branch has diverged or is ahead of remote. Skipping auto-pull."
+        fi
+    else
+        echo "[HaikalDev] No Git updates. Local copy is up to date."
+    fi
+fi
+
 # 1. Setup Frontend
 if [ -f "package.json" ]; then
     if [ ! -d "node_modules" ]; then
