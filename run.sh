@@ -44,28 +44,39 @@ if [ "$NODE_MAJOR" -lt 22 ]; then
     echo "[HaikalDev] Upgraded portable Node.js to $(node -v)"
 fi
 
-# 0.5. Check for Git updates
+# 0.5. Check for Git updates (via commit cache)
 if [ -d ".git" ]; then
     echo "[HaikalDev] Checking for Git updates..."
     # Fetch latest upstream changes
     git fetch origin || echo "[HaikalDev] Git fetch failed (offline or no remote set up)."
     
-    LOCAL=$(git rev-parse HEAD 2>/dev/null || echo "")
-    REMOTE=$(git rev-parse @{u} 2>/dev/null || echo "")
-    if [ -n "$LOCAL" ] && [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ]; then
-        BASE=$(git merge-base HEAD @{u} 2>/dev/null || echo "")
-        if [ "$LOCAL" = "$BASE" ]; then
-            echo "[HaikalDev] New Git updates detected. Pulling changes..."
+    CURRENT_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "")
+    REMOTE_COMMIT=$(git rev-parse @{u} 2>/dev/null || echo "")
+    CACHED_COMMIT_FILE=".cached_git_commit"
+    CACHED_COMMIT=$(cat "$CACHED_COMMIT_FILE" 2>/dev/null || echo "")
+    
+    # 1. Pull changes if remote is ahead of local HEAD
+    if [ -n "$CURRENT_COMMIT" ] && [ -n "$REMOTE_COMMIT" ] && [ "$CURRENT_COMMIT" != "$REMOTE_COMMIT" ]; then
+        BASE_COMMIT=$(git merge-base HEAD @{u} 2>/dev/null || echo "")
+        if [ "$CURRENT_COMMIT" = "$BASE_COMMIT" ]; then
+            echo "[HaikalDev] New Git updates detected on remote. Pulling changes..."
             git pull
+            CURRENT_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "")
             echo "[HaikalDev] Deleting dist folder for recompilation..."
             rm -rf dist
-        else
-            echo "[HaikalDev] Local branch has diverged or is ahead of remote. Skipping auto-pull."
         fi
+    fi
+
+    # 2. Rebuild if the current active commit is different from the last cached run
+    if [ "$CURRENT_COMMIT" != "$CACHED_COMMIT" ]; then
+        echo "[HaikalDev] Code update detected (Current: $CURRENT_COMMIT, Cached: $CACHED_COMMIT). Triggering clean recompile..."
+        rm -rf dist
+        echo "$CURRENT_COMMIT" > "$CACHED_COMMIT_FILE"
     else
         echo "[HaikalDev] No Git updates. Local copy is up to date."
     fi
 fi
+
 
 # 1. Setup Frontend
 if [ -f "package.json" ]; then
