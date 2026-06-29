@@ -234,9 +234,23 @@ const About = () => {
                 Who am I?
               </h3>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                I'm <strong className="text-slate-900 dark:text-white">Haikal Mabrur</strong>, a 17-year-old developer from South Sumatera, Indonesia.
+                I'm{' '}
+                <strong className="text-slate-900 dark:text-white">Haikal Mabrur</strong>
+                {' '}— often known online as{' '}
+                <span className="text-primary-400 font-semibold">AnakTentara</span> or <span className="text-primary-400 font-semibold">acell</span>{' '}
+                — a teenage developer from{' '}
+                <strong className="text-slate-900 dark:text-white">Muara Enim, Sumatera Selatan</strong>, Indonesia.
+                Siswa{' '}
+                <strong className="text-slate-900 dark:text-white">MAN 1 Muara Enim</strong>{' '}
+                yang aktif dalam kegiatan{' '}
+                <strong className="text-slate-900 dark:text-white">PIK-R</strong>{' '}
+                dan berbagai proyek digital.
+              </p>
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 Since I was 12, I've been diving deep into technology — from building HTML websites to
-                managing Minecraft servers with custom Java plugins.
+                managing{' '}
+                <strong className="text-slate-900 dark:text-white">Minecraft servers</strong>{' '}
+                (NaturalSMP) with custom Java plugins.
               </p>
             </motion.div>
 
@@ -252,8 +266,16 @@ const About = () => {
               </h3>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 What started as curiosity about how websites work grew into a full-blown passion for
-                software development. I love learning new frameworks, building communities around
-                Minecraft, and shipping projects that solve real problems.
+                software development and creative media. Beyond coding, I'm also a{' '}
+                <strong className="text-slate-900 dark:text-white">fotografer</strong>,{' '}
+                <strong className="text-slate-900 dark:text-white">videografer</strong>, dan{' '}
+                <strong className="text-slate-900 dark:text-white">video editor</strong>{' '}
+                — I love capturing moments as much as building digital experiences.
+              </p>
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                I also build communities around{' '}
+                <strong className="text-slate-900 dark:text-white">NaturalSMP</strong>{' '}
+                and ship projects that solve real problems — from automation bots to complete web platforms.
               </p>
             </motion.div>
 

@@ -1,70 +1,182 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="id" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ===== Primary SEO ===== -->
-    <title>Haikal Mabrur — Student Developer & Creator</title>
-    <meta name="description" content="Hi, I'm Haikal Mabrur — a 17-year-old developer from South Sumatera, Indonesia. I build modern web apps, manage servers, create Minecraft plugins, and develop automation bots." />
-    <meta name="keywords" content="Haikal Mabrur, HaikalDev, Web Developer, Minecraft Plugin, Bot Developer, Server Manager, React Developer, Indonesia, Portfolio" />
+    <title>Haikal Mabrur | haikal.mabrur — Developer, Fotografer, Editor | Muara Enim</title>
+    <meta name="description" content="Haikal Mabrur (AnakTentara, haikal_mabrur, acell) — siswa MAN 1 Muara Enim, developer web, fotografer, videografer & editor asal Muara Enim, Sumatera Selatan. Aktif di PIK-R, NaturalSMP, dan proyek kreatif digital." />
+
+    <!--
+      Meta keywords: Google tidak memprioritaskan ini, tapi Bing & crawler lain masih membaca.
+      Lebih penting: konten halaman yang natural.
+    -->
+    <meta name="keywords" content="
+      Haikal, haikal, Haikal Mabrur, haikal mabrur, haikal marur, haikal manrur,
+      Haikal MAN, Haikal MAN TJR, Haikal TJR, Haikal MAN 1 Muara Enim,
+      haikal website, website haikal, haikal portfolio, portfolio haikal,
+      nama gue haikal, gue haikal, nama haikal, gue haikal mabrur,
+      haikal anaktentara, anaktentara, anak tentara, AnakTentara,
+      anak tentara naturalsmp, haikal naturalsmp, naturalsmp haikal,
+      haikal acell, acell haikal, acell, haikal_mabrur, haikal-mabrur, haikal.mabrur,
+      haikal 25, haikal mabrur 25,
+      Haikal PIK-R, Haikal PIK R, PIK-R Muara Enim,
+      Haikal Muara Enim, Muara Enim developer, developer Muara Enim,
+      Haikal Fotografer, fotografer Muara Enim, fotografer haikal,
+      Haikal Videografer, videografer haikal, videografer Muara Enim,
+      Haikal Editor, video editor haikal, editor haikal,
+      Haikal dev, Haikal Dev, HaikalDev, haikaldev, haikaldev.my.id, haikaldev id, haikal developer,
+      Haikal web developer, web developer Indonesia, student developer Indonesia,
+      Minecraft developer Indonesia, NaturalSMP, natural smp, naturalsmp.xyz,
+      React developer Indonesia, Java plugin developer, Discord bot developer,
+      developer Sumatera Selatan, programmer muda Indonesia, siswa developer
+    " />
+
     <meta name="author" content="Haikal Mabrur" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://haikaldev.my.id/" />
 
-    <!-- ===== Open Graph / Facebook / WhatsApp / Discord ===== -->
-    <meta property="og:type" content="website" />
+    <!-- ===== Geo & Language ===== -->
+    <meta name="geo.region" content="ID-SS" />
+    <meta name="geo.placename" content="Muara Enim, Sumatera Selatan, Indonesia" />
+    <meta name="geo.position" content="-3.6667;103.7500" />
+    <meta name="ICBM" content="-3.6667, 103.7500" />
+    <meta name="language" content="id, en" />
+    <link rel="alternate" hreflang="id" href="https://haikaldev.my.id/" />
+    <link rel="alternate" hreflang="en" href="https://haikaldev.my.id/" />
+    <link rel="alternate" hreflang="x-default" href="https://haikaldev.my.id/" />
+
+    <!-- ===== Open Graph / Facebook / WhatsApp / Discord / LINE ===== -->
+    <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://haikaldev.my.id/" />
-    <meta property="og:title" content="Haikal Mabrur — Student Developer & Creator" />
-    <meta property="og:description" content="A passionate teenager from Indonesia building modern web apps, Minecraft plugins, and automation bots. Open for projects & collaborations." />
+    <meta property="og:title" content="Haikal Mabrur — Developer, Fotografer & Editor | Muara Enim" />
+    <meta property="og:description" content="Haikal Mabrur alias AnakTentara & acell — siswa MAN 1 Muara Enim, web developer, fotografer, videografer, video editor, dan kreator digital asal Sumatera Selatan. Aktif di PIK-R dan NaturalSMP." />
     <meta property="og:image" content="https://haikaldev.my.id/images/icon-bggradient.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Haikal Mabrur — HaikalDev Portfolio" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="HaikalDev" />
+    <meta property="og:image:alt" content="Haikal Mabrur — HaikalDev" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:site_name" content="HaikalDev — Haikal Mabrur" />
+    <meta property="profile:first_name" content="Haikal" />
+    <meta property="profile:last_name" content="Mabrur" />
+    <meta property="profile:username" content="haikal_mabrur" />
 
     <!-- ===== Twitter / X Card ===== -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://haikaldev.my.id/" />
-    <meta name="twitter:title" content="Haikal Mabrur — Student Developer & Creator" />
-    <meta name="twitter:description" content="A passionate teenager from Indonesia building modern web apps, Minecraft plugins, and automation bots." />
+    <meta name="twitter:title" content="Haikal Mabrur — Developer, Fotografer & Editor | Muara Enim" />
+    <meta name="twitter:description" content="Haikal Mabrur (AnakTentara, acell, haikal_mabrur) — web developer, fotografer, videografer & editor asal Muara Enim, Indonesia." />
     <meta name="twitter:image" content="https://haikaldev.my.id/images/icon-bggradient.png" />
+    <meta name="twitter:creator" content="@haikal_mabrur" />
+    <meta name="twitter:site" content="@haikal_mabrur" />
 
     <!-- ===== Theme & App ===== -->
     <meta name="theme-color" content="#060814" />
     <meta name="color-scheme" content="dark light" />
-    <meta name="application-name" content="HaikalDev Portfolio" />
+    <meta name="application-name" content="HaikalDev" />
+    <meta name="msapplication-TileColor" content="#060814" />
 
     <!-- ===== Favicon ===== -->
     <link rel="icon" type="image/png" href="/images/icon-bggradient.png" />
     <link rel="apple-touch-icon" href="/images/icon-bggradient.png" />
 
-    <!-- ===== JSON-LD Structured Data ===== -->
+    <!-- ===== JSON-LD Structured Data: Person ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
+      "@id": "https://haikaldev.my.id/#person",
       "name": "Haikal Mabrur",
+      "givenName": "Haikal",
+      "familyName": "Mabrur",
+      "alternateName": [
+        "haikal", "Haikal", "haikal mabrur",
+        "AnakTentara", "anak tentara", "anaktentara",
+        "acell", "Acell", "haikal acell", "acell haikal",
+        "haikal_mabrur", "haikal-mabrur", "haikal.mabrur",
+        "HaikalDev", "haikaldev", "haikal dev", "Haikal Dev",
+        "Haikal MAN", "Haikal TJR", "Haikal MAN TJR",
+        "haikal 25", "haikal mabrur 25",
+        "Haikal PIK-R", "Haikal PIK R",
+        "haikal naturalsmp", "haikal marur", "haikal manrur"
+      ],
       "url": "https://haikaldev.my.id",
-      "image": "https://haikaldev.my.id/images/icon-bggradient.png",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://haikaldev.my.id/images/icon-bggradient.png",
+        "contentUrl": "https://haikaldev.my.id/images/icon-bggradient.png"
+      },
       "sameAs": [
         "https://github.com/AnakTentara",
         "https://linkedin.com/in/haikal-mabrur",
         "https://instagram.com/haikal_mabrur",
-        "https://youtube.com/@AnakTentaraIDN"
+        "https://youtube.com/@AnakTentaraIDN",
+        "https://discord.com/users/804720825109315605",
+        "https://wa.me/6289675732001"
       ],
-      "jobTitle": "Student Developer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance"
+      "jobTitle": [
+        "Student Developer",
+        "Web Developer",
+        "Fotografer",
+        "Videografer",
+        "Video Editor"
+      ],
+      "description": "Haikal Mabrur, dikenal sebagai AnakTentara dan acell, adalah siswa MAN 1 Muara Enim, web developer, fotografer, videografer, dan video editor muda asal Muara Enim, Sumatera Selatan, Indonesia. Aktif dalam PIK-R dan mengelola server Minecraft NaturalSMP.",
+      "birthPlace": {
+        "@type": "Place",
+        "name": "Muara Enim, Sumatera Selatan, Indonesia"
       },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Muara Enim",
+        "addressRegion": "Sumatera Selatan",
         "addressCountry": "ID"
       },
-      "knowsAbout": ["Web Development", "Minecraft Plugin Development", "Bot Development", "Server Management", "React", "Java", "Node.js"]
+      "nationality": "Indonesian",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "MAN 1 Muara Enim",
+        "alternateName": ["MAN TJR", "MAN Muara Enim"]
+      },
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "name": "PIK-R",
+          "alternateName": "Pusat Informasi Konseling Remaja"
+        },
+        {
+          "@type": "Organization",
+          "name": "NaturalSMP",
+          "url": "https://web.naturalsmp.xyz"
+        }
+      ],
+      "knowsAbout": [
+        "Web Development", "React", "JavaScript", "Java",
+        "Minecraft Plugin Development", "Bot Development",
+        "Server Management", "Fotografi", "Videografi",
+        "Video Editing", "Adobe Premiere Pro", "Node.js"
+      ],
+      "email": "me@haikaldev.my.id"
+    }
+    </script>
+
+    <!-- ===== JSON-LD: WebSite (enables Sitelinks Searchbox) ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://haikaldev.my.id/#website",
+      "name": "HaikalDev — Haikal Mabrur",
+      "alternateName": ["Haikal Mabrur Portfolio", "haikaldev.my.id", "haikal.mabrur website"],
+      "url": "https://haikaldev.my.id",
+      "description": "Website resmi Haikal Mabrur — developer, fotografer, videografer, dan editor asal Muara Enim, Indonesia.",
+      "inLanguage": ["id", "en"],
+      "author": {
+        "@id": "https://haikaldev.my.id/#person"
+      }
     }
     </script>
   </head>
