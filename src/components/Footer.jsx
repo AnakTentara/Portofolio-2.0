@@ -1,23 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Instagram, MessageSquare, Youtube, Phone } from 'lucide-react';
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import $icon from '../../images/icon.png';
 
 const Footer = () => {
   const icon = $icon;
   const currentYear = new Date().getFullYear();
   const location = useLocation();
-  const currentPath = location.pathname;
+  const navigate = useNavigate();
 
   const scrollOrNavigate = (targetId) => {
-    if (currentPath !== "/") {
-      window.location.href = `/#${targetId}`;
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 350);
     } else {
       const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -54,6 +57,17 @@ const Footer = () => {
     }
   ];
 
+  // All-in-one navigation — always shown regardless of current route
+  const navLinks = [
+    { label: 'Home',             type: 'scroll', target: 'home' },
+    { label: 'About',            type: 'scroll', target: 'about' },
+    { label: 'Projects',         type: 'scroll', target: 'projects' },
+    { label: 'Contact',          type: 'scroll', target: 'contact' },
+    { label: 'More About Me',    type: 'route',  target: '/more-about' },
+    { label: 'Projects Archive', type: 'route',  target: '/more-projects' },
+    { label: 'Downloads',        type: 'route',  target: '/downloads' },
+  ];
+
   return (
     <footer className="relative mt-24 border-t border-slate-200/50 dark:border-white/5 bg-white/70 dark:bg-slate-950/80 backdrop-blur-md z-10">
       {/* Iridescent top border line */}
@@ -83,43 +97,31 @@ const Footer = () => {
             </p>
           </div>
  
-          {/* Quick Links (4 cols) */}
+          {/* Quick Links (4 cols) — All-in-one, always visible */}
           <div className="md:col-span-4 space-y-4">
             <h4 className="text-slate-900 dark:text-white font-bold text-sm uppercase tracking-wider" style={{ fontFamily: 'Archivo, sans-serif' }}>
               Quick Navigation
             </h4>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-              <li onClick={() => scrollOrNavigate("home")} className="text-slate-600 dark:text-slate-400 hover:text-primary transition duration-200 cursor-pointer">
-                Home
-              </li>
-              {currentPath === "/" && (
-                <>
-                  <li onClick={() => scrollOrNavigate("about")} className="text-slate-600 dark:text-slate-400 hover:text-primary transition duration-200 cursor-pointer">
-                    About
-                  </li>
-                  <li onClick={() => scrollOrNavigate("projects")} className="text-slate-600 dark:text-slate-400 hover:text-primary transition duration-200 cursor-pointer">
-                    Projects
-                  </li>
-                  <li onClick={() => scrollOrNavigate("contact")} className="text-slate-600 dark:text-slate-400 hover:text-primary transition duration-200 cursor-pointer">
-                    Contact
-                  </li>
-                </>
-              )}
-              <li>
-                <RouterLink to='/more-about' className="text-slate-600 dark:text-slate-400 hover:text-primary transition duration-200">
-                  More Info
-                </RouterLink>
-              </li>
-              <li>
-                <RouterLink to='/more-projects' className="text-slate-600 dark:text-slate-400 hover:text-primary transition duration-200">
-                  Projects Archive
-                </RouterLink>
-              </li>
-              <li>
-                <RouterLink to='/downloads' className="text-slate-600 dark:text-slate-400 hover:text-primary transition duration-200">
-                  Downloads
-                </RouterLink>
-              </li>
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  {link.type === 'scroll' ? (
+                    <button
+                      onClick={() => scrollOrNavigate(link.target)}
+                      className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition duration-200 cursor-pointer text-left"
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <RouterLink
+                      to={link.target}
+                      className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition duration-200"
+                    >
+                      {link.label}
+                    </RouterLink>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
  
@@ -139,6 +141,7 @@ const Footer = () => {
                   whileTap={{ scale: 0.9 }}
                   className="flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-md group relative overflow-hidden"
                   title={social.name}
+                  aria-label={social.name}
                 >
                   <div 
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"

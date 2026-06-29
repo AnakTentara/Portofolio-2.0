@@ -13,6 +13,10 @@ import profileLogo from '../../images/icon.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Auto-calculate years of experience
+const CODING_START_YEAR = 2019;
+const getYearsExperience = () => new Date().getFullYear() - CODING_START_YEAR;
+
 const SectionHeader = ({ title, subtitle, eyebrow }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
@@ -152,7 +156,7 @@ const About = () => {
   const infoCards = [
     { icon: MapPin,     label: 'Location',    value: 'Muara Enim, Indonesia' },
     { icon: Calendar,   label: 'Age',         value: '17 years old' },
-    { icon: Briefcase,  label: 'Experience',  value: '5+ years' },
+    { icon: Briefcase,  label: 'Experience',  value: `${getYearsExperience()}+ years` },
     { icon: Layers,     label: 'Projects',    value: '15+ completed' },
   ];
 
@@ -394,7 +398,7 @@ const About = () => {
                   <h4 className="text-slate-900 dark:text-white font-bold text-base mb-1" style={{ fontFamily: 'Archivo, sans-serif' }}>
                     {item.title}
                   </h4>
-                  <p className="text-slate-555 dark:text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                  <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                     {item.subtitle}
                   </p>
                 </motion.div>

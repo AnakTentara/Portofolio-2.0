@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaYoutube } from 'react-icons/fa';
+import { Youtube } from 'lucide-react';
 
 const EditingResultsItem = ({ title, description, date, video, icon: Icon, isActive, onClick }) => {
   return (
@@ -40,35 +40,35 @@ const EditingResultsJourney = () => {
       date: "2025",
       description: "Learned about how shot with many actors.",
       video: "https://www.youtube.com/embed/7ZLEr6J2Spc",
-      icon: FaYoutube
+      icon: Youtube
     },
     {
       title: "Searching for Backsound",
       date: "2024",
       description: "Learned about the magic of backsound.",
       video: "https://www.youtube.com/embed/RTUjUz0EX7E",
-      icon: FaYoutube
+      icon: Youtube
     },
     {
       title: "Using Video Editing Techniques",
       date: "2024",
       description: "Learned video editing techniques using Adobe Premiere Pro.",
       video: "https://www.youtube.com/embed/fiwWnCcFbk0",
-      icon: FaYoutube
+      icon: Youtube
     },
     {
       title: "Color Grading and Correction",
       date: "2024",
       description: "Learned about color grading and correction techniques using Adobe Premiere Pro",
       video: "https://www.youtube.com/embed/eTjX_RZ-Aao",
-      icon: FaYoutube
+      icon: Youtube
     },
     {
       title: "Video Editing Basics",
       date: "2022",
       description: "Learned the basics of video editing using Adobe Premiere Pro.",
       video: "https://www.youtube.com/embed/XWERBANyAY4",
-      icon: FaYoutube
+      icon: Youtube
     },
   ];
 

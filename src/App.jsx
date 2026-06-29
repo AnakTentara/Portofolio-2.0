@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 
 import LoadingPage from './components/LoadingPage';
 import Navbar from './components/Navbar';
@@ -12,24 +12,30 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import MoreAbout from './components/pages/MoreAbout';
-import Downloads from './components/pages/Downloads';
-import Download from './components/pages/direct-page/Download';
-import Unduh from './components/pages/direct-page/Unduh';
-import More from './components/pages/direct-page/More';
-import MoreProjects from './components/pages/MoreProjects';
-import Project from './components/pages/direct-page/Project';
-import NotFound from './components/pages/direct-page/404';
-
-import { PreventInteractions } from './utils/preventInteractions';
 import CustomCursor from './components/CustomCursor';
+
+// Lazy-loaded route pages
+const MoreAbout    = lazy(() => import('./components/pages/MoreAbout'));
+const Downloads    = lazy(() => import('./components/pages/Downloads'));
+const Download     = lazy(() => import('./components/pages/direct-page/Download'));
+const Unduh        = lazy(() => import('./components/pages/direct-page/Unduh'));
+const MoreProjects = lazy(() => import('./components/pages/MoreProjects'));
+const Project      = lazy(() => import('./components/pages/direct-page/Project'));
+const NotFound     = lazy(() => import('./components/pages/direct-page/404'));
 
 import icongr from '../images/icon-bggradient.png';
 import icon from '../images/icon.png';
 import porto1 from '../images/screenshot-portofolio.png';
 import porto2 from '../images/naturalsmp-screenshot.png';
 import porto3 from '../images/1stportofolio.png';
-import porto4 from '../images/nanikoregroup.png'
+import porto4 from '../images/nanikoregroup.png';
+
+// Minimal fallback for lazy-loaded pages
+const PageFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg)]">
+    <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-blue-500 animate-spin" />
+  </div>
+);
 
 function App() {
   const location = useLocation();
@@ -74,36 +80,38 @@ function App() {
 
   return (
     <div className="relative overflow-x-hidden min-h-screen">
-      <PreventInteractions />
       <CustomCursor />
 
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={
-          <DynamicBackground>
-            <Hero />
-            <InteractiveDivider />
-            <FadeUp>
-              <About />
-            </FadeUp>
-            <FadeUp delay={200}>
-              <Projects />
-            </FadeUp>
-            <FadeUp delay={400}>
-              <Contact />
-            </FadeUp>
-          </DynamicBackground>
-        } />
-        <Route path="/downloads" element={<Downloads />} />
-        <Route path="/unduh" element={<Unduh />} />
-        <Route path="/download" element={<Download />} />
-        <Route path="/more-about" element={<MoreAbout />} />
-        <Route path="/more" element={<More />} />
-        <Route path="/more-projects" element={<MoreProjects />} />
-        <Route path="/project" element={<Project />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<PageFallback />}>
+        <Routes>
+          <Route path="/" element={
+            <DynamicBackground>
+              <Hero />
+              <InteractiveDivider />
+              <FadeUp>
+                <About />
+              </FadeUp>
+              <FadeUp delay={200}>
+                <Projects />
+              </FadeUp>
+              <FadeUp delay={400}>
+                <Contact />
+              </FadeUp>
+            </DynamicBackground>
+          } />
+          <Route path="/downloads"    element={<Downloads />} />
+          <Route path="/unduh"        element={<Unduh />} />
+          <Route path="/download"     element={<Download />} />
+          <Route path="/more-about"   element={<MoreAbout />} />
+          <Route path="/more"         element={<Navigate to="/more-about" replace />} />
+          <Route path="/more-projects" element={<MoreProjects />} />
+          <Route path="/project"      element={<Project />} />
+          <Route path="*"             element={<NotFound />} />
+        </Routes>
+      </Suspense>
+
       <Footer />
     </div>
   );

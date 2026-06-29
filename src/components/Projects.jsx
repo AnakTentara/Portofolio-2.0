@@ -144,7 +144,7 @@ const ProjectCard = ({ project, index }) => {
                   {project.title}
                 </h3>
               </div>
-              <p className="text-slate-650 dark:text-slate-400 text-sm leading-relaxed mb-5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 {project.description}
               </p>
             </div>
@@ -279,7 +279,7 @@ const Projects = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-slate-650 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
+            className="text-slate-600 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             A curated selection of things I've built, reflecting my journey across web, Minecraft development, and automation.

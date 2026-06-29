@@ -134,10 +134,6 @@ body, html {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
   line-height: 1.6;
   font-size: 16px;
   transition: background-color var(--transition-base), color var(--transition-base);

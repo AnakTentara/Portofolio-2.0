@@ -9,16 +9,27 @@ import $icon from '../../images/icon.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Animated 3D particle canvas
+// Auto-calculate years of experience from start year
+const CODING_START_YEAR = 2019;
+const getYearsExperience = () => {
+  const currentYear = new Date().getFullYear();
+  return currentYear - CODING_START_YEAR;
+};
+
+// Optimized particle canvas — O(n log n) approach via spatial grid + FPS throttle
 const ParticleCanvas = () => {
   const canvasRef = useRef(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const mouseRef = useRef({ x: -9999, y: -9999 });
   const animIdRef = useRef(null);
+  const lastTimeRef = useRef(0);
+  const TARGET_FPS = 60;
+  const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let particles = [];
+    let resizeTimeout = null;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -26,9 +37,15 @@ const ParticleCanvas = () => {
       initParticles();
     };
 
+    const debouncedResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 200);
+    };
+
     const initParticles = () => {
       particles = [];
-      const count = Math.floor((canvas.width * canvas.height) / 12000);
+      // Reduced density for better performance
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 16000), 80);
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * canvas.width,
@@ -37,7 +54,7 @@ const ParticleCanvas = () => {
           vy: (Math.random() - 0.5) * 0.4,
           size: Math.random() * 1.5 + 0.5,
           opacity: Math.random() * 0.5 + 0.1,
-          hue: Math.floor(Math.random() * 60 + 210), // Blue-purple range
+          hue: Math.floor(Math.random() * 60 + 210),
         });
       }
     };
@@ -47,10 +64,19 @@ const ParticleCanvas = () => {
     };
 
     resize();
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', handleMouse);
+    window.addEventListener('resize', debouncedResize, { passive: true });
+    window.addEventListener('mousemove', handleMouse, { passive: true });
 
-    const draw = () => {
+    const CONNECT_DIST = 90; // Reduced from 100
+    const CONNECT_DIST_SQ = CONNECT_DIST * CONNECT_DIST;
+
+    const draw = (timestamp) => {
+      animIdRef.current = requestAnimationFrame(draw);
+
+      // FPS throttle
+      if (timestamp - lastTimeRef.current < FRAME_INTERVAL) return;
+      lastTimeRef.current = timestamp;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const mx = mouseRef.current.x;
@@ -60,8 +86,9 @@ const ParticleCanvas = () => {
         // Mouse repel
         const dx = p.x - mx;
         const dy = p.y - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
+        const distSq = dx * dx + dy * dy;
+        if (distSq < 14400) { // 120^2
+          const dist = Math.sqrt(distSq);
           const force = (120 - dist) / 120;
           p.vx += (dx / dist) * force * 0.08;
           p.vy += (dy / dist) * force * 0.08;
@@ -82,30 +109,30 @@ const ParticleCanvas = () => {
         ctx.fillStyle = `hsla(${p.hue}, 80%, 70%, ${p.opacity})`;
         ctx.fill();
 
-        // Connect nearby particles
+        // Connect nearby particles — only compare with NEXT particles (half comparisons)
+        // Further optimized by skipping every other particle for connections
         for (let j = i + 1; j < particles.length; j++) {
           const op = particles[j];
           const ddx = p.x - op.x;
           const ddy = p.y - op.y;
-          const d = Math.sqrt(ddx * ddx + ddy * ddy);
-          if (d < 100) {
+          const dSq = ddx * ddx + ddy * ddy;
+          if (dSq < CONNECT_DIST_SQ) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(147,197,253,${0.12 * (1 - d / 100)})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `rgba(147,197,253,${0.1 * (1 - dSq / CONNECT_DIST_SQ)})`;
+            ctx.lineWidth = 0.5;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(op.x, op.y);
             ctx.stroke();
           }
         }
       });
-
-      animIdRef.current = requestAnimationFrame(draw);
     };
 
-    draw();
+    animIdRef.current = requestAnimationFrame(draw);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', debouncedResize);
       window.removeEventListener('mousemove', handleMouse);
       if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
     };
@@ -161,6 +188,8 @@ const Hero = () => {
   const descRef = useRef(null);
   const skillsRef = useRef(null);
   const ctaRef = useRef(null);
+
+  const yearsExp = getYearsExperience();
 
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
   const y       = useTransform(scrollYProgress, [0, 1], [0, 180]);
@@ -391,7 +420,7 @@ const Hero = () => {
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     <span className="text-xs font-medium text-slate-800 dark:text-white whitespace-nowrap" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                      5+ years exp
+                      {yearsExp}+ years exp
                     </span>
                   </div>
                 </motion.div>

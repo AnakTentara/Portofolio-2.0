@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { FaHome, FaDownload, FaCode, FaGamepad, FaServer, FaLaptopCode, FaUserGraduate } from 'react-icons/fa';
+import { Home, Download, Code2, Gamepad2, Server, Laptop2, GraduationCap } from 'lucide-react';
+
 
 const MoreAbout = () => {
   const [titleHover, setTitleHover] = useState(false);
@@ -55,17 +56,17 @@ const MoreAbout = () => {
   const skills = [
     { 
       category: "Web Development",
-      icon: FaCode,
+      icon: Code2,
       items: ["React", "JavaScript", "HTML/CSS", "TailwindCSS"]
     },
     {
       category: "Programming",
-      icon: FaLaptopCode,
+      icon: Laptop2,
       items: ["C++", "C#", "Python", "NodeJS", "JavaScript", "Java"]
     },
     {
       category: "Other Skills",
-      icon: FaServer,
+      icon: Server,
       items: ["Music Production", "Video Editing", "Gaming", "Designing", "Photography", "Videography"]
     }
   ];
@@ -155,12 +156,12 @@ const MoreAbout = () => {
             <div className="glass-card p-8 hover:border-[var(--glass-card-border)]">
               <div className="flex items-center mb-6">
                 <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-400 mr-4">
-                  <FaUserGraduate size={24} />
+                  <GraduationCap size={24} />
                 </div>
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-300 to-purple-400 bg-clip-text text-transparent">Background</h2>
               </div>
               
-              <div className="text-slate-600 dark:text-slate-350 space-y-4">
+              <div className="text-slate-600 dark:text-slate-400 space-y-4">
                 <p>
                   I'm a passionate technology enthusiast from Indonesia, born in 2008.
                   My journey in tech started with gaming and gradually evolved into software development.
@@ -282,7 +283,7 @@ const MoreAbout = () => {
                     <div className="text-3xl mr-3">{spec.icon}</div>
                     <div>
                       <h3 className="text-xl font-bold text-slate-900 dark:text-white">{spec.title}</h3>
-                      <p className="text-primary-650 dark:text-primary-300">{spec.subtitle}</p>
+                      <p className="text-primary-400 dark:text-primary-300">{spec.subtitle}</p>
                     </div>
                   </div>
                 </div>
@@ -304,7 +305,7 @@ const MoreAbout = () => {
               whileTap={{ scale: 0.95 }}
               className="btn-outline flex items-center px-8 py-3 cursor-pointer shadow-sm"
             >
-              <FaHome className="mr-2" />
+              <Home size={16} className="mr-2" />
               Back to Home
             </motion.div>
           </Link>
@@ -315,7 +316,7 @@ const MoreAbout = () => {
               whileTap={{ scale: 0.95 }}
               className="btn-primary flex items-center px-8 py-3 cursor-pointer shadow-lg"
             >
-              <FaDownload className="mr-2" />
+              <Download size={16} className="mr-2" />
               Downloads
             </motion.div>
           </Link>

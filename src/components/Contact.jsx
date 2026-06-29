@@ -44,7 +44,7 @@ const ContactCard = ({ icon: Icon, title, value, color, action }) => {
       </div>
 
       <div className="flex-1 min-w-0">
-        <h4 className="text-slate-505 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+        <h4 className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
           {title}
         </h4>
         <p className="text-slate-900 dark:text-white font-medium text-sm mt-0.5 truncate">
@@ -185,7 +185,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-slate-655 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
+            className="text-slate-600 dark:text-slate-400 text-lg max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             Have a project in mind, want to collaborate, or just want to chat? Fill out the form or reach out directly.
@@ -227,7 +227,7 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -2 }}
                     whileTap={{ scale: 0.9 }}
-                    className="flex items-center justify-center w-11 h-11 rounded-full border border-slate-200 dark:border-white/5 text-slate-550 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-md relative group overflow-hidden"
+                    className="flex items-center justify-center w-11 h-11 rounded-full border border-slate-200 dark:border-white/5 text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-md relative group overflow-hidden"
                     style={{ background: social.color }}
                   >
                     <div 
