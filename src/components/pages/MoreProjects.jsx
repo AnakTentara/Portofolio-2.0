@@ -440,17 +440,17 @@ const MoreProjects = () => {
           </div>
 
           {/* Social Channels CTA Buttons */}
-          <div className="mt-20 flex flex-wrap justify-center gap-4">
+          <div className="mt-20 flex flex-wrap justify-center gap-5">
             <motion.a
               href="https://youtube.com/@AnakTentaraIDN"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.04, y: -2 }}
+              whileHover={{ scale: 1.04, y: -2, boxShadow: '0 8px 30px rgba(239, 68, 68, 0.2)' }}
               whileTap={{ scale: 0.96 }}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all shadow-lg text-sm cursor-pointer"
-              style={{ background: 'linear-gradient(135deg, #FF0000, #CC0000)', fontFamily: 'Space Grotesk, sans-serif' }}
+              className="flex items-center gap-2.5 px-6 py-3 rounded-xl font-semibold text-slate-800 dark:text-white bg-slate-100/10 dark:bg-white/5 backdrop-blur-md border border-slate-200/50 dark:border-white/10 hover:border-red-500/50 dark:hover:border-red-500/50 transition-all text-sm cursor-pointer shadow-lg"
+              style={{ fontFamily: 'Space Grotesk, sans-serif' }}
             >
-              <Youtube size={16} />
+              <Youtube size={17} className="text-red-500" />
               YouTube Channel
             </motion.a>
 
@@ -458,12 +458,12 @@ const MoreProjects = () => {
               href="https://instagram.com/haikal_mabrur"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.04, y: -2 }}
+              whileHover={{ scale: 1.04, y: -2, boxShadow: '0 8px 30px rgba(236, 72, 153, 0.2)' }}
               whileTap={{ scale: 0.96 }}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all shadow-lg text-sm cursor-pointer"
-              style={{ background: 'linear-gradient(135deg, #C13584, #E1306C, #FD1D1D)', fontFamily: 'Space Grotesk, sans-serif' }}
+              className="flex items-center gap-2.5 px-6 py-3 rounded-xl font-semibold text-slate-800 dark:text-white bg-slate-100/10 dark:bg-white/5 backdrop-blur-md border border-slate-200/50 dark:border-white/10 hover:border-pink-500/50 dark:hover:border-pink-500/50 transition-all text-sm cursor-pointer shadow-lg"
+              style={{ fontFamily: 'Space Grotesk, sans-serif' }}
             >
-              <Instagram size={16} />
+              <Instagram size={17} className="text-pink-500" />
               Instagram Profile
             </motion.a>
 
@@ -471,12 +471,12 @@ const MoreProjects = () => {
               href="https://www.tiktok.com/@shakaaru25"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.04, y: -2 }}
+              whileHover={{ scale: 1.04, y: -2, boxShadow: '0 8px 30px rgba(6, 182, 212, 0.2)' }}
               whileTap={{ scale: 0.96 }}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all shadow-lg text-sm cursor-pointer"
-              style={{ background: 'linear-gradient(135deg, #010101, #00f2fe, #fe0979)', fontFamily: 'Space Grotesk, sans-serif' }}
+              className="flex items-center gap-2.5 px-6 py-3 rounded-xl font-semibold text-slate-800 dark:text-white bg-slate-100/10 dark:bg-white/5 backdrop-blur-md border border-slate-200/50 dark:border-white/10 hover:border-teal-500/50 dark:hover:border-teal-500/50 transition-all text-sm cursor-pointer shadow-lg"
+              style={{ fontFamily: 'Space Grotesk, sans-serif' }}
             >
-              <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4.5 h-4.5 text-teal-400 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.92-1.88 2.63-5.23 3.73-8.24 2.82-3.14-.95-5.34-4.12-4.99-7.42.3-2.82 2.47-5.24 5.27-5.67.75-.11 1.51-.1 2.26.04v4.07c-.7-.24-1.48-.22-2.14.16-.92.51-1.42 1.59-1.2 2.64.22 1.05 1.22 1.78 2.27 1.64 1.12-.15 1.83-.98 1.83-2.07-.01-5.11-.01-10.22-.01-15.33z"/>
               </svg>
               TikTok Profile

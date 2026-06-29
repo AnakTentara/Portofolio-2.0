@@ -104,7 +104,7 @@ const CustomCursor = () => {
   const isMouseVisible = cursorState === 'mouse';
 
   // ──────────── TOUCH CURSOR ────────────
-  const isTouchVisible = cursorState === 'touch' || cursorState === 'fading';
+  const isTouchVisible = false; // Disabled touch cursor to prevent mobile lag
   const touchOpacity = cursorState === 'fading' ? 0 : 1;
 
   return (
