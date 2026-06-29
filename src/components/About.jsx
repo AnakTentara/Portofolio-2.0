@@ -478,12 +478,12 @@ const About = () => {
               <LanguageBar lang="English"    level={85}  color="linear-gradient(90deg, #3B82F6, #60A5FA)" delay={0.3} />
             </div>
 
-            <div className="mt-8 p-4 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/3">
-              <p className="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <div className="mt-8 p-4 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/40 backdrop-blur-sm">
+              <p className="text-slate-700 dark:text-slate-200 text-sm italic leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 "I believe every line of code is a small step toward building something meaningful.
                 Learning never stops — and that's what makes this journey exciting."
               </p>
-              <p className="text-slate-400 dark:text-slate-500 text-xs mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>— Haikal Mabrur</p>
+              <p className="text-slate-500 dark:text-slate-400 text-xs mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>— Haikal Mabrur</p>
             </div>
           </motion.div>
         </div>

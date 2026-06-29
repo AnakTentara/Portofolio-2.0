@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { 
   Home, Download, Github, ExternalLink, Code2, 
-  Calendar, Film, Youtube, Play, ArrowLeft 
+  Calendar, Film, Youtube, Play, ArrowLeft, Instagram 
 } from 'lucide-react';
 
 import projectPictPortov1 from '../../../images/1stportofolio.png';
@@ -310,6 +310,14 @@ const MoreProjects = () => {
     }
   ];
 
+  const archiveVideos = [
+    { id: 21, videoUrl: "https://www.youtube.com/embed/IJTM3Y0ot2Y", isShort: true },
+    { id: 22, videoUrl: "https://www.youtube.com/embed/F4UAHaXZAHQ", isShort: true },
+    { id: 23, videoUrl: "https://www.youtube.com/embed/Ev7alPMQC4w", isShort: true },
+    { id: 24, videoUrl: "https://www.youtube.com/embed/kr617AHlz_o", isShort: false },
+    { id: 25, videoUrl: "https://www.youtube.com/embed/N1KZ_tRiwdc", isShort: false },
+  ];
+
   return (
     <div className="min-h-screen bg-transparent text-slate-800 dark:text-white pt-24 md:pt-32 pb-16 relative overflow-hidden">
       {/* Decorative Orbs */}
@@ -399,6 +407,80 @@ const MoreProjects = () => {
                 index={index}
               />
             ))}
+          </div>
+
+          {/* Minimal Gallery Sub-section */}
+          <div className="mt-20">
+            <div className="text-center mb-10">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2" style={{ fontFamily: 'Archivo, sans-serif' }}>
+                Video Gallery & Shorts
+              </h3>
+              <div className="w-12 h-[2px] bg-primary/30 mx-auto" />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto items-start">
+              {archiveVideos.map((video) => (
+                <motion.div
+                  key={video.id}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  className="glass-card overflow-hidden border border-slate-200 dark:border-white/5 bg-slate-100/30 dark:bg-slate-950/20"
+                >
+                  <div className={`w-full relative ${video.isShort ? 'aspect-[9/16]' : 'aspect-video'} bg-black`}>
+                    <iframe
+                      src={video.videoUrl}
+                      className="w-full h-full border-none absolute inset-0"
+                      title="Archive Video"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Social Channels CTA Buttons */}
+          <div className="mt-20 flex flex-wrap justify-center gap-4">
+            <motion.a
+              href="https://youtube.com/@AnakTentaraIDN"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all shadow-lg text-sm cursor-pointer"
+              style={{ background: 'linear-gradient(135deg, #FF0000, #CC0000)', fontFamily: 'Space Grotesk, sans-serif' }}
+            >
+              <Youtube size={16} />
+              YouTube Channel
+            </motion.a>
+
+            <motion.a
+              href="https://instagram.com/haikal_mabrur"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all shadow-lg text-sm cursor-pointer"
+              style={{ background: 'linear-gradient(135deg, #C13584, #E1306C, #FD1D1D)', fontFamily: 'Space Grotesk, sans-serif' }}
+            >
+              <Instagram size={16} />
+              Instagram Profile
+            </motion.a>
+
+            <motion.a
+              href="https://www.tiktok.com/@shakaaru25"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all shadow-lg text-sm cursor-pointer"
+              style={{ background: 'linear-gradient(135deg, #010101, #00f2fe, #fe0979)', fontFamily: 'Space Grotesk, sans-serif' }}
+            >
+              <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.92-1.88 2.63-5.23 3.73-8.24 2.82-3.14-.95-5.34-4.12-4.99-7.42.3-2.82 2.47-5.24 5.27-5.67.75-.11 1.51-.1 2.26.04v4.07c-.7-.24-1.48-.22-2.14.16-.92.51-1.42 1.59-1.2 2.64.22 1.05 1.22 1.78 2.27 1.64 1.12-.15 1.83-.98 1.83-2.07-.01-5.11-.01-10.22-.01-15.33z"/>
+              </svg>
+              TikTok Profile
+            </motion.a>
           </div>
         </motion.section>
 

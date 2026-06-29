@@ -13,6 +13,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import ScrollToTop from './components/ScrollToTop';
 
 // Lazy-loaded route pages
 const MoreAbout    = lazy(() => import('./components/pages/MoreAbout'));
@@ -81,6 +82,7 @@ function App() {
   return (
     <div className="relative overflow-x-hidden min-h-screen">
       <CustomCursor />
+      <ScrollToTop />
 
       <Navbar />
 

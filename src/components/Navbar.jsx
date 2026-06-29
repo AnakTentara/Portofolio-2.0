@@ -115,16 +115,6 @@ const Navbar = () => {
 
   return (
     <nav ref={navRef} className="fixed w-full top-4 left-0 right-0 z-50 px-4 md:px-6">
-      {/* Scroll progress bar */}
-      <div
-        ref={progressRef}
-        className="fixed top-0 left-0 right-0 h-[2.5px] origin-left z-[60]"
-        style={{
-          background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899)',
-          transform: 'scaleX(0)',
-        }}
-      />
-
       <div className="max-w-5xl mx-auto">
         <motion.div
           className={`relative rounded-2xl px-5 md:px-7 py-3 md:py-3 transition-all duration-500 bg-white/20 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 shadow-md dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${
@@ -132,6 +122,16 @@ const Navbar = () => {
           }`}
           style={{ backdropFilter: 'blur(24px) saturate(180%)' }}
         >
+          {/* Scroll progress bar inside navbar card */}
+          <div
+            ref={progressRef}
+            className="absolute top-0 left-0 right-0 h-[2px] origin-left z-20 rounded-t-2xl"
+            style={{
+              background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899)',
+              transform: 'scaleX(0)',
+            }}
+          />
+
           {/* Top light glow reflection */}
           <div
             className="absolute top-0 left-6 right-6 h-[1.5px] rounded-full opacity-60"

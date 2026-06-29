@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { ExternalLink, ArrowRight, Github, Code2, Server, Bot } from 'lucide-react';
+import { ExternalLink, ArrowRight, Github, Code2, Server, Bot, Film } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import projectPictPortov1 from '../../images/1stportofolio.png';
@@ -90,47 +90,61 @@ const ProjectCard = ({ project, index }) => {
         <div className="flex flex-col h-full">
           {/* Project Image & Gradient Overlay */}
           <div className="relative h-52 overflow-hidden rounded-t-2xl">
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0d1222] z-10"
-              animate={{ opacity: isHovered ? 0.3 : 0.5 }}
-            />
-            <motion.img
-              src={project.image}
-              alt={project.title}
-              className="object-cover w-full h-full"
-              animate={{ scale: isHovered ? 1.06 : 1 }}
-              transition={{ duration: 0.5 }}
-            />
-            {/* Quick Action Links Overlay */}
-            <motion.div
-              className="absolute top-4 right-4 z-20 flex gap-2"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.9 }}
-              transition={{ duration: 0.2 }}
-            >
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 text-slate-700 dark:text-slate-200 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-all shadow-md"
-                  onClick={(e) => e.stopPropagation()}
+            {project.isVideoEdit ? (
+              <div className="w-full h-full bg-black relative">
+                <iframe
+                  src={project.videoUrl}
+                  className="w-full h-full border-none"
+                  title={project.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0d1222] z-10"
+                  animate={{ opacity: isHovered ? 0.3 : 0.5 }}
+                />
+                <motion.img
+                  src={project.image}
+                  alt={project.title}
+                  className="object-cover w-full h-full"
+                  animate={{ scale: isHovered ? 1.06 : 1 }}
+                  transition={{ duration: 0.5 }}
+                />
+                {/* Quick Action Links Overlay */}
+                <motion.div
+                  className="absolute top-4 right-4 z-20 flex gap-2"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.9 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <Github size={16} />
-                </a>
-              )}
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 text-white bg-primary/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-primary transition-all shadow-md"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink size={15} />
-                </a>
-              )}
-            </motion.div>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-9 h-9 text-slate-700 dark:text-slate-200 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-all shadow-md"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Github size={16} />
+                    </a>
+                  )}
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-9 h-9 text-white bg-primary/80 backdrop-blur-md rounded-full border border-slate-200 dark:border-white/10 hover:bg-primary transition-all shadow-md"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <ExternalLink size={15} />
+                    </a>
+                  )}
+                </motion.div>
+              </>
+            )}
           </div>
 
           {/* Project Content */}
@@ -190,7 +204,7 @@ const Projects = () => {
   
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Web', 'Minecraft', 'Bot'];
+  const categories = ['All', 'Web', 'Minecraft', 'Bot', 'Video'];
 
   const projects = [
     {
@@ -213,6 +227,17 @@ const Projects = () => {
       link: "https://web.naturalsmp.xyz",
       icon: Server,
       category: "Minecraft"
+    },
+    {
+      id: 5,
+      title: "My First Big Project (Video Edit)",
+      description: "Learned about how to shoot with many actors, balancing complex shots and managing multiple on-screen performances.",
+      videoUrl: "https://www.youtube.com/embed/7ZLEr6J2Spc",
+      technologies: ["Adobe Premiere Pro", "Sound Design", "Directing"],
+      link: "https://www.youtube.com/watch?v=7ZLEr6J2Spc",
+      icon: Film,
+      category: "Video",
+      isVideoEdit: true
     },
     {
       id: 3,
