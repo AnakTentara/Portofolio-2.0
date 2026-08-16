@@ -237,7 +237,7 @@ const About = () => {
                 I'm{' '}
                 <strong className="text-slate-900 dark:text-white">Haikal Mabrur</strong>
                 {' '}— often known online as{' '}
-                <span className="text-primary-400 font-semibold">AnakTentara</span> or <span className="text-primary-400 font-semibold">acell</span>{' '}
+                <span className="text-primary-400 font-semibold">AnakTentara</span> or <span className="text-primary-400 font-semibold">aten</span>{' '}
                 — a teenage developer from{' '}
                 <strong className="text-slate-900 dark:text-white">Muara Enim, Sumatera Selatan</strong>, Indonesia.
                 Siswa{' '}
