@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 UI/UX Pro Max Core - BM25 search engine for UI/UX style guides
-Enhanced with synonym expansion and fuzzy matching.
 """
 
 import csv
@@ -107,103 +106,9 @@ _STACK_COLS = {
 AVAILABLE_STACKS = list(STACK_CONFIG.keys())
 
 
-# ============ SYNONYM EXPANSION TABLE ============
-# Maps common terms to their synonyms for better search recall.
-# When a query contains a key term, the top synonyms are injected into the query.
-# Reverse mapping also works: if a synonym appears, the key term is added.
-SYNONYMS = {
-    "dark mode":      ["night", "deep dark", "black theme", "dark theme", "dark ui"],
-    "light mode":     ["bright", "white theme", "light theme", "day mode"],
-    "fintech":        ["finance", "banking", "crypto", "wallet", "payment", "money"],
-    "dashboard":      ["admin panel", "analytics", "metrics", "data view", "overview"],
-    "minimal":        ["minimalism", "clean", "simple", "whitespace", "less is more"],
-    "glass":          ["glassmorphism", "frosted", "blur", "translucent", "transparency"],
-    "neuro":          ["neumorphism", "soft ui", "clay", "soft shadow"],
-    "brutal":         ["brutalism", "raw", "anti-design", "punk", "rough"],
-    "gradient":       ["aurora", "mesh gradient", "color gradient", "blend"],
-    "saas":           ["software", "platform", "tool", "app", "service"],
-    "ecommerce":      ["e-commerce", "shop", "store", "marketplace", "retail", "online store"],
-    "healthcare":     ["medical", "health", "hospital", "clinic", "wellness", "patient"],
-    "portfolio":      ["personal", "resume", "cv", "showcase", "about me"],
-    "gaming":         ["game", "esports", "play", "arcade", "interactive"],
-    "education":      ["learning", "school", "course", "study", "e-learning", "tutorial"],
-    "food":           ["restaurant", "recipe", "cooking", "delivery", "menu", "culinary"],
-    "travel":         ["tourism", "hotel", "booking", "flight", "vacation", "trip"],
-    "music":          ["audio", "streaming", "player", "sound", "podcast", "spotify"],
-    "fitness":        ["gym", "workout", "exercise", "health", "training", "sport"],
-    "social":         ["community", "network", "chat", "messaging", "forum", "social media"],
-    "real estate":    ["property", "housing", "apartment", "rent", "realty", "home"],
-    "beauty":         ["cosmetics", "skincare", "makeup", "salon", "spa", "aesthetic"],
-    "modern":         ["contemporary", "current", "trendy", "fresh", "new"],
-    "luxury":         ["premium", "high-end", "exclusive", "elegant", "upscale"],
-    "playful":        ["fun", "vibrant", "colorful", "energetic", "cheerful", "whimsical"],
-    "professional":   ["corporate", "business", "enterprise", "formal", "b2b"],
-    "retro":          ["vintage", "nostalgic", "old school", "classic", "throwback"],
-    "neon":           ["glow", "cyberpunk", "fluorescent", "electric", "synthwave"],
-    "organic":        ["natural", "earth", "eco", "green", "sustainable", "botanical"],
-    "flat":           ["flat design", "material", "simple shapes", "no shadow"],
-    "3d":             ["three dimensional", "depth", "perspective", "isometric", "spatial"],
-    "animation":      ["motion", "transition", "animate", "micro-interaction", "kinetic"],
-    "accessibility":  ["a11y", "wcag", "aria", "inclusive", "screen reader"],
-    "responsive":     ["adaptive", "mobile first", "fluid", "breakpoint", "flexible"],
-    "loading":        ["skeleton", "spinner", "placeholder", "lazy", "shimmer"],
-    "form":           ["input", "field", "validation", "submit", "text field"],
-    "navigation":     ["nav", "menu", "sidebar", "breadcrumb", "tabs", "navbar"],
-    "modal":          ["dialog", "popup", "overlay", "drawer", "sheet", "bottom sheet"],
-    "card":           ["tile", "panel", "widget", "container", "box"],
-    "button":         ["cta", "action", "submit", "click", "press", "btn"],
-    "table":          ["grid", "data table", "spreadsheet", "list view", "datagrid"],
-    "chart":          ["graph", "visualization", "data viz", "plot", "diagram"],
-    "icon":           ["glyph", "symbol", "pictogram", "svg", "vector icon"],
-    "color":          ["palette", "hue", "tint", "shade", "swatch", "scheme"],
-    "typography":     ["font", "typeface", "lettering", "type", "text style"],
-    "hero":           ["banner", "header", "above fold", "splash", "jumbotron"],
-    "pricing":        ["plans", "subscription", "tiers", "packages", "billing"],
-    "testimonial":    ["review", "feedback", "social proof", "customer story"],
-}
-
-
-def expand_query(query: str) -> str:
-    """Expand query with synonym terms for better recall."""
-    query_lower = query.lower()
-    expanded_terms = [query]
-
-    for term, synonyms in SYNONYMS.items():
-        if term in query_lower:
-            # Term found in query — add top 3 synonyms
-            expanded_terms.extend(synonyms[:3])
-        else:
-            # Check if any synonym appears in the query — add the key term
-            for syn in synonyms:
-                if syn in query_lower:
-                    expanded_terms.append(term)
-                    break
-
-    return " ".join(expanded_terms)
-
-
-# ============ FUZZY MATCHING ============
-def _edit_distance(s1, s2):
-    """Simple Levenshtein distance for fuzzy matching."""
-    if len(s1) < len(s2):
-        return _edit_distance(s2, s1)
-    if len(s2) == 0:
-        return len(s1)
-    prev_row = range(len(s2) + 1)
-    for i, c1 in enumerate(s1):
-        curr_row = [i + 1]
-        for j, c2 in enumerate(s2):
-            insertions = prev_row[j + 1] + 1
-            deletions = curr_row[j] + 1
-            substitutions = prev_row[j] + (c1 != c2)
-            curr_row.append(min(insertions, deletions, substitutions))
-        prev_row = curr_row
-    return prev_row[-1]
-
-
 # ============ BM25 IMPLEMENTATION ============
 class BM25:
-    """BM25 ranking algorithm for text search with fuzzy matching fallback"""
+    """BM25 ranking algorithm for text search"""
 
     def __init__(self, k1=1.5, b=0.75):
         self.k1 = k1
@@ -240,7 +145,7 @@ class BM25:
             self.idf[word] = log((self.N - freq + 0.5) / (freq + 0.5) + 1)
 
     def score(self, query):
-        """Score all documents against query, with fuzzy matching fallback"""
+        """Score all documents against query"""
         query_tokens = self.tokenize(query)
         scores = []
 
@@ -253,30 +158,11 @@ class BM25:
 
             for token in query_tokens:
                 if token in self.idf:
-                    # Exact match
                     tf = term_freqs[token]
                     idf = self.idf[token]
                     numerator = tf * (self.k1 + 1)
                     denominator = tf + self.k1 * (1 - self.b + self.b * doc_len / self.avgdl)
                     score += idf * numerator / denominator
-                else:
-                    # Fuzzy fallback: find closest word within edit distance 2
-                    if len(token) >= 4:  # Only fuzzy-match longer tokens
-                        best_match = None
-                        best_dist = 3  # threshold
-                        for word in self.idf:
-                            if abs(len(word) - len(token)) > 2:
-                                continue
-                            dist = _edit_distance(token, word)
-                            if dist < best_dist:
-                                best_dist = dist
-                                best_match = word
-                        if best_match:
-                            tf = term_freqs.get(best_match, 0)
-                            idf = self.idf[best_match]
-                            numerator = tf * (self.k1 + 1)
-                            denominator = tf + self.k1 * (1 - self.b + self.b * doc_len / self.avgdl)
-                            score += (idf * numerator / denominator) * 0.6  # Discounted fuzzy score
 
             scores.append((idx, score))
 
@@ -291,7 +177,7 @@ def _load_csv(filepath):
 
 
 def _search_csv(filepath, search_cols, output_cols, query, max_results):
-    """Core search function using BM25 with synonym expansion"""
+    """Core search function using BM25"""
     if not filepath.exists():
         return []
 
@@ -300,13 +186,10 @@ def _search_csv(filepath, search_cols, output_cols, query, max_results):
     # Build documents from search columns
     documents = [" ".join(str(row.get(col, "")) for col in search_cols) for row in data]
 
-    # Expand query with synonyms for better recall
-    expanded = expand_query(query)
-
     # BM25 search
     bm25 = BM25()
     bm25.fit(documents)
-    ranked = bm25.score(expanded)
+    ranked = bm25.score(query)
 
     # Get top results with score > 0
     results = []

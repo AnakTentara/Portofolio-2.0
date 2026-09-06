@@ -2,18 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 UI/UX Pro Max Search - BM25 search engine for UI/UX style guides
-Enhanced with HTML output format and interactive REPL mode.
-
 Usage: python search.py "<query>" [--domain <domain>] [--stack <stack>] [--max-results 3]
        python search.py "<query>" --design-system [-p "Project Name"]
        python search.py "<query>" --design-system --persist [-p "Project Name"] [--page "dashboard"]
-       python search.py                          # Interactive REPL mode
 
 Domains: style, prompt, color, chart, landing, product, ux, typography, google-fonts
 Stacks: react, nextjs, vue, svelte, astro, swiftui, react-native, flutter, nuxtjs, nuxt-ui, html-tailwind, shadcn, jetpack-compose, threejs, angular, laravel, javafx, wpf, winui, avalonia, uno, uwp
 
 Persistence (Master + Overrides pattern):
-  --persist    Save design system to design-system/MASTER.md + preview.html + tailwind-theme.json + variables.css
+  --persist    Save design system to design-system/MASTER.md
   --page       Also create a page-specific override file in design-system/pages/
 """
 
@@ -56,80 +53,7 @@ def format_output(result):
     return "\n".join(output)
 
 
-def interactive_repl():
-    """Interactive REPL console for quick queries without reloading Python."""
-    print("\n╔══════════════════════════════════════════════════════╗")
-    print("║     UI/UX Pro Max — Interactive Search Console      ║")
-    print("╠══════════════════════════════════════════════════════╣")
-    print("║  Commands:                                          ║")
-    print("║    <query>              Search (auto-detect domain) ║")
-    print("║    :domain <d> <query>  Search specific domain      ║")
-    print("║    :stack <s> <query>   Search stack guidelines     ║")
-    print("║    :ds <query>          Generate design system      ║")
-    print("║    :help                Show this help              ║")
-    print("║    :quit / :q           Exit                        ║")
-    print("╚══════════════════════════════════════════════════════╝\n")
-
-    while True:
-        try:
-            user_input = input("🔍 > ").strip()
-        except (EOFError, KeyboardInterrupt):
-            print("\nGoodbye!")
-            break
-
-        if not user_input:
-            continue
-
-        if user_input in (":quit", ":q", ":exit"):
-            print("Goodbye!")
-            break
-
-        if user_input == ":help":
-            print("\nDomains:", ", ".join(CSV_CONFIG.keys()))
-            print("Stacks:", ", ".join(AVAILABLE_STACKS))
-            print("Commands: :domain <d> <q>, :stack <s> <q>, :ds <q>, :quit\n")
-            continue
-
-        if user_input.startswith(":domain "):
-            parts = user_input[8:].strip().split(None, 1)
-            if len(parts) < 2:
-                print("Usage: :domain <domain> <query>")
-                continue
-            domain, query = parts
-            result = search(query, domain)
-            print(format_output(result))
-            continue
-
-        if user_input.startswith(":stack "):
-            parts = user_input[7:].strip().split(None, 1)
-            if len(parts) < 2:
-                print("Usage: :stack <stack> <query>")
-                continue
-            stack, query = parts
-            result = search_stack(query, stack)
-            print(format_output(result))
-            continue
-
-        if user_input.startswith(":ds "):
-            query = user_input[4:].strip()
-            if not query:
-                print("Usage: :ds <query>")
-                continue
-            result = generate_design_system(query, output_format="ascii")
-            print(result)
-            continue
-
-        # Default: auto-detect domain search
-        result = search(user_input)
-        print(format_output(result))
-
-
 if __name__ == "__main__":
-    # If no arguments provided, launch interactive REPL
-    if len(sys.argv) == 1:
-        interactive_repl()
-        sys.exit(0)
-
     parser = argparse.ArgumentParser(description="UI Pro Max Search")
     parser.add_argument("query", help="Search query")
     parser.add_argument("--domain", "-d", choices=list(CSV_CONFIG.keys()), help="Search domain")
@@ -139,9 +63,9 @@ if __name__ == "__main__":
     # Design system generation
     parser.add_argument("--design-system", "-ds", action="store_true", help="Generate complete design system recommendation")
     parser.add_argument("--project-name", "-p", type=str, default=None, help="Project name for design system output")
-    parser.add_argument("--format", "-f", choices=["ascii", "markdown", "html"], default="ascii", help="Output format for design system")
+    parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="Output format for design system")
     # Persistence (Master + Overrides pattern)
-    parser.add_argument("--persist", action="store_true", help="Save design system to design-system/ (MASTER.md + preview.html + tailwind-theme.json + variables.css)")
+    parser.add_argument("--persist", action="store_true", help="Save design system to design-system/MASTER.md (creates hierarchical structure)")
     parser.add_argument("--page", type=str, default=None, help="Create page-specific override file in design-system/pages/")
     parser.add_argument("--output-dir", "-o", type=str, default=None, help="Output directory for persisted files (default: current directory)")
 
@@ -165,9 +89,6 @@ if __name__ == "__main__":
             print("\n" + "=" * 60)
             print(f"✅ Design system persisted to design-system/{project_slug}/")
             print(f"   📄 design-system/{project_slug}/MASTER.md (Global Source of Truth)")
-            print(f"   🌐 design-system/{project_slug}/preview.html (Interactive Preview)")
-            print(f"   🎨 design-system/{project_slug}/tailwind-theme.json (Tailwind Config)")
-            print(f"   🎯 design-system/{project_slug}/variables.css (CSS Variables)")
             if args.page:
                 page_filename = args.page.lower().replace(' ', '-')
                 print(f"   📄 design-system/{project_slug}/pages/{page_filename}.md (Page Overrides)")

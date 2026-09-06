@@ -1,18 +1,10 @@
 ---
 name: ui-ux-pro-max
-description: Comprehensive design guide for web, mobile, and desktop applications. Contains 67 styles, 161 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 22 technology stacks. Enhanced with synonym-aware fuzzy search, interactive HTML preview, Tailwind JSON export, and CSS variables generation.
+description: Comprehensive design guide for web, mobile, and desktop applications. Contains 67 styles, 161 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 22 technology stacks.
 ---
 # ui-ux-pro-max
 
 Comprehensive design guide for web, mobile, and desktop applications. Contains 67 styles, 161 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 22 technology stacks. Searchable database with priority-based recommendations.
-
-**Enhanced Features:**
-- 🔍 **Synonym Expansion** — 40+ synonym mappings for better search recall (e.g., "fintech" → banking, crypto, wallet)
-- 🧩 **Fuzzy Matching** — Edit-distance fallback catches typos (e.g., "dashbord" → "dashboard")
-- 🌐 **HTML Preview** — Interactive `preview.html` with dark/light toggle, click-to-copy colors, live component demos
-- 🎨 **Tailwind Export** — `tailwind-theme.json` ready to paste into `tailwind.config.js`
-- 🎯 **CSS Variables** — `variables.css` with all design tokens as custom properties
-- 💬 **REPL Mode** — Launch without arguments for interactive search console
 
 # Prerequisites
 
@@ -98,9 +90,6 @@ python3 skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system --persi
 
 This creates:
 - `design-system/MASTER.md` — Global Source of Truth with all design rules
-- `design-system/preview.html` — Interactive HTML preview page (open in browser)
-- `design-system/tailwind-theme.json` — Tailwind CSS theme extension config
-- `design-system/variables.css` — CSS custom properties stylesheet
 - `design-system/pages/` — Folder for page-specific overrides
 
 **With page-specific override:**

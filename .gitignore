@@ -47,3 +47,7 @@ backend/data/*.db-wal
 backend/node_modules/
 backend/.env
 .env
+
+# Python cache
+__pycache__/
+*.pyc
