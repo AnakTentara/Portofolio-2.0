@@ -7,6 +7,11 @@ Format ini didasarkan pada [Keep a Changelog](https://keepachangelog.com/id/1.0.
 ## [Belum dirilis]
 
 ### Ditambahkan
+- **Highlight Proyek AI-Haikaru**:
+  - Menambahkan proyek **AI-Haikaru (WhatsApp Assistant)** di posisi pertama sebagai *Latest & Highlighted Project* lengkap dengan badge status animasi, kategori *Bot*, tautan resmi `https://ai.haikaldev.my.id` dan repository GitHub `https://github.com/AnakTentara/AI-Haikaru`.
+  - Mengintegrasikan aset logo resmi AI-Haikaru ke dalam galeri proyek `images/ai-haikaru.png`.
+  - Memperbarui halaman arsip proyek (`MoreProjects.jsx`) dengan kartu proyek AI-Haikaru berprioritas utama (lebar 2 kolom) dan status `Latest`.
+  - Memperbarui metadata SEO dan JSON-LD Structured Data (`index.html`) untuk menyertakan AI-Haikaru.
 - **Peningkatan UI & Navigasi**:
   - Tombol melayang *Scroll to Top* (`ScrollToTop.jsx`) dengan ikon Mouse dan ArrowUp yang muncul otomatis setelah scroll melewati 300px.
   - Kategori baru **Video** pada filter proyek di halaman utama (`Projects.jsx`) dengan dukungan pemutar iframe inline.
@@ -24,6 +29,7 @@ Format ini didasarkan pada [Keep a Changelog](https://keepachangelog.com/id/1.0.
   - **Backup Snapshot**: Cadangan versi sebelumnya disimpan di `.agents/skills/ui-ux-pro-max-backup/`.
 
 ### Diubah
+- **Pengarsipan Status NaturalSMP**: Mengubah status proyek NaturalSMP Minecraft Server menjadi `Archived` pada `Projects.jsx`, `MoreProjects.jsx`, serta memperbarui narasi bio di `About.jsx`.
 - **Navbar Progress Bar**: Indikator progress scroll dipindahkan ke dalam wadah rounded navbar card dengan margin inset horizontal (`left-6 right-6`) dan bentuk pil melingkar penuh (`rounded-full`) agar rapi dan tidak meluap keluar dari sudut melengkung navbar.
 - **Perbaikan Keterbacaan Quotes Dark Mode**: Mengubah styling kutipan pada halaman `About.jsx` menggunakan kartu *liquid glass* (`bg-slate-950/40 backdrop-blur-sm border-white/10`) dengan teks `dark:text-slate-200` agar sangat kontras dan jelas di dark mode.
 - **Optimalisasi Touch Mobile (`CustomCursor.jsx`)**: Menonaktifkan overlay custom touch cursor pada layar sentuh/mobile untuk menghilangkan delay sentuhan dan lag scroll.

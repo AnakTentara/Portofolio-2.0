@@ -6,6 +6,7 @@ import {
   Calendar, Film, Youtube, Play, ArrowLeft, Instagram 
 } from 'lucide-react';
 
+import projectPictAIHaikaru from '../../../images/ai-haikaru.png';
 import projectPictPortov1 from '../../../images/1stportofolio.png';
 import projectPictPortov2 from '../../../images/screenshot-portofolio.png';
 import projectPictNaturalSMP from '../../../images/naturalsmp-screenshot.png';
@@ -83,6 +84,23 @@ const ProjectCard = ({ project, index, priority = false }) => {
               animate={{ scale: isHovered ? 1.05 : 1 }}
               transition={{ duration: 0.4 }}
             />
+
+            {/* Status Badges */}
+            {project.isHighlighted && (
+              <div className="absolute top-4 left-4 z-20">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/30 border border-white/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  Latest Project
+                </span>
+              </div>
+            )}
+            {project.status === 'Archived' && (
+              <div className="absolute top-4 left-4 z-20">
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-800/85 backdrop-blur-md text-slate-300 border border-slate-700 shadow">
+                  Archived
+                </span>
+              </div>
+            )}
 
             {/* Hover actions buttons */}
             <motion.div
@@ -162,6 +180,8 @@ const ProjectCard = ({ project, index, priority = false }) => {
             <span className={`text-xs px-2.5 py-0.5 rounded-full font-semibold border ${
               project.status === 'Completed' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' :
               project.status === 'In Progress' ? 'bg-amber-500/10 border-amber-500/20 text-amber-400' :
+              project.status === 'Archived' ? 'bg-slate-500/10 border-slate-500/20 text-slate-400' :
+              project.status === 'Latest' ? 'bg-purple-500/15 border-purple-500/30 text-purple-400 font-bold' :
               'bg-blue-500/10 border-blue-500/20 text-blue-400'
             }`}>
               {project.status}
@@ -199,6 +219,19 @@ const MoreProjects = () => {
 
   const projects = [
     {
+      id: 0,
+      title: "AI-Haikaru (WhatsApp Assistant)",
+      description: "Asisten kecerdasan buatan berbasis WhatsApp mandiri & otonom dengan visi multi-foto, live web-browser crawler, generator dokumen perkantoran (PDF, DOCX, XLSX), serta interactive vibe coding.",
+      image: projectPictAIHaikaru,
+      technologies: ["Node.js", "Baileys", "Gemini 2.5", "Puppeteer", "Tailwind CSS"],
+      github: "https://github.com/AnakTentara/AI-Haikaru",
+      link: "https://ai.haikaldev.my.id",
+      date: "2026",
+      type: "AI Bot & Web",
+      status: "Latest",
+      isHighlighted: true
+    },
+    {
       id: 1,
       title: "Portfolio Website 2.0",
       description: "My personal portfolio website built with React and Tailwind CSS, featuring smooth animations and responsive design. It showcases my projects, skills, and experiences.",
@@ -212,14 +245,14 @@ const MoreProjects = () => {
     },
     {
       id: 2,
-      title: "NaturalSMP Minecraft Server",
-      description: "A custom Minecraft server network with unique gameplay features, custom plugins, and a dedicated community. Supports multiple game modes and events.",
+      title: "NaturalSMP Minecraft Server (Archived)",
+      description: "A custom Minecraft server network with unique gameplay features, custom plugins, and a dedicated community. (Currently archived).",
       image: projectPictNaturalSMP,
       technologies: ["Java", "PaperMC", "Docker", "SQLite"],
       link: "https://web.naturalsmp.xyz",
       date: "2023",
       type: "Game Server",
-      status: "In Progress"
+      status: "Archived"
     },
     {
       id: 3,

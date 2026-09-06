@@ -247,10 +247,10 @@ const About = () => {
                 dan berbagai proyek digital.
               </p>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                Since I was 12, I've been diving deep into technology — from building HTML websites to
-                managing{' '}
+                Since I was 12, I've been diving deep into technology — from building HTML websites and managing{' '}
                 <strong className="text-slate-900 dark:text-white">Minecraft servers</strong>{' '}
-                (NaturalSMP) with custom Java plugins.
+                (NaturalSMP) to engineering autonomous{' '}
+                <strong className="text-slate-900 dark:text-white">AI assistants</strong> (AI-Haikaru).
               </p>
             </motion.div>
 
@@ -273,9 +273,10 @@ const About = () => {
                 — I love capturing moments as much as building digital experiences.
               </p>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                I also build communities around{' '}
-                <strong className="text-slate-900 dark:text-white">NaturalSMP</strong>{' '}
-                and ship projects that solve real problems — from automation bots to complete web platforms.
+                I build intelligent solutions like{' '}
+                <strong className="text-slate-900 dark:text-white">AI-Haikaru</strong>, previously fostered community in{' '}
+                <strong className="text-slate-900 dark:text-white">NaturalSMP</strong>,{' '}
+                and continuously ship projects that solve real-world problems.
               </p>
             </motion.div>
 

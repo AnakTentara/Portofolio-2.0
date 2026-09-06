@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ExternalLink, ArrowRight, Github, Code2, Server, Bot, Film } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import projectPictAIHaikaru from '../../images/ai-haikaru.png';
 import projectPictPortov1 from '../../images/1stportofolio.png';
 import projectPictPortov2 from '../../images/screenshot-portofolio.png';
 import projectPictNaturalSMP from '../../images/naturalsmp-screenshot.png';
@@ -113,6 +114,22 @@ const ProjectCard = ({ project, index }) => {
                   animate={{ scale: isHovered ? 1.06 : 1 }}
                   transition={{ duration: 0.5 }}
                 />
+                {/* Status Badges */}
+                {project.isHighlighted && (
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/30 border border-white/20">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                      Latest Project
+                    </span>
+                  </div>
+                )}
+                {project.isArchived && (
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-800/85 backdrop-blur-md text-slate-300 border border-slate-700 shadow">
+                      Archived
+                    </span>
+                  </div>
+                )}
                 {/* Quick Action Links Overlay */}
                 <motion.div
                   className="absolute top-4 right-4 z-20 flex gap-2"
@@ -208,6 +225,18 @@ const Projects = () => {
 
   const projects = [
     {
+      id: 0,
+      title: "AI-Haikaru (WhatsApp Assistant)",
+      description: "Asisten AI bot WhatsApp cerdas mandiri & otonom dengan visi multi-foto, live web-browser crawler, olah dokumen perkantoran, dan vibe coding interaktif.",
+      image: projectPictAIHaikaru,
+      technologies: ["Node.js", "Baileys", "Gemini 2.5", "Puppeteer", "Tailwind CSS"],
+      github: "https://github.com/AnakTentara/AI-Haikaru",
+      link: "https://ai.haikaldev.my.id",
+      icon: Bot,
+      category: "Bot",
+      isHighlighted: true
+    },
+    {
       id: 1,
       title: "Portfolio Website 2.0",
       description: "My personal portfolio website built with React and Tailwind CSS, featuring smooth animations and responsive design.",
@@ -220,13 +249,14 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: "NaturalSMP Minecraft Server",
-      description: "A custom Minecraft server network with unique gameplay features, custom plugins, and a dedicated community.",
+      title: "NaturalSMP Minecraft Server (Archived)",
+      description: "A custom Minecraft server network with unique gameplay features, custom plugins, and a dedicated community. (Currently archived).",
       image: projectPictNaturalSMP,
       technologies: ["Java", "PaperMC", "Docker", "SQLite"],
       link: "https://web.naturalsmp.xyz",
       icon: Server,
-      category: "Minecraft"
+      category: "Minecraft",
+      isArchived: true
     },
     {
       id: 5,
